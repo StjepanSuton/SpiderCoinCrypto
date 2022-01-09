@@ -1,0 +1,74 @@
+@import "../variables";
+.rank {
+  font-family: $primary-font;
+  font-size: $h4;
+  color: $secondary-color;
+  margin-bottom: $padding-value;
+}
+.first-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: $padding-value;
+}
+.name {
+  font-size: $h2;
+  font-family: $primary-font;
+}
+.image {
+  width: 35px;
+  margin-right: $padding-value;
+}
+.second-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: $padding-value;
+}
+.price {
+  font-size: $h1;
+  font-family: $primary-font;
+  margin-right: $padding-value;
+}
+.percentage-positive {
+  font-size: $h4;
+  font-family: $primary-font;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: $positive-color;
+  color: rgb(255, 255, 255);
+}
+.percentage-negative {
+  font-size: $h4;
+  font-family: $primary-font;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: $negative-color;
+  color: rgb(255, 255, 255);
+}
+.lowhigh {
+  font-family: $primary-font;
+  font-size: $h6;
+}
+.market-info {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-gap: 16px;
+  flex-direction: row;
+}
+.ingrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.ingrid-info {
+  font-family: $primary-font;
+  font-size: $h4;
+  color: $secondary-color;
+}
+.ingrid-value {
+  font-family: $primary-font;
+  font-size: $h4;
+  color: $primary-color;
+}

@@ -1,0 +1,44 @@
+@import "../variables";
+.container {
+  display: grid 1fr;
+}
+.title {
+  font-family: $primary-font;
+  font-size: $h2;
+  margin-bottom: $padding-value;
+}
+.small-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $padding-value;
+}
+.sub-titles {
+  font-family: $primary-font;
+  color: $secondary-color;
+  font-size: $h4;
+}
+.values {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: $primary-font;
+  font-size: $h4;
+}
+.links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: $primary-font;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: $h4;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  background-color: $secondary-color;
+  cursor: pointer;
+  &:hover {
+    background-color: cornflowerblue;
+  }
+}

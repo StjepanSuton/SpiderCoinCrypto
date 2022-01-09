@@ -1,0 +1,23 @@
+@import "../variables";
+@import "../components";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: $padding-value;
+  margin-bottom: $padding-value;
+  @include container;
+}
+.title {
+  font-size: $h2;
+  margin-bottom: $padding-value;
+}
+.slider {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $padding-value;
+}

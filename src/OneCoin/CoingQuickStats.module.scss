@@ -1,0 +1,34 @@
+@import "../variables";
+.big {
+  padding: $padding-value;
+  border-radius: 4px;
+  background-color: rgba(59, 131, 246, 0.188);
+}
+.container {
+  font-family: $primary-font;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-size: $h2;
+}
+.title {
+  font-size: $h2;
+}
+.small-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: $padding-value;
+  padding-top: $padding-value;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.201);
+}
+.subtitle {
+  font-family: $primary-font;
+  font-size: $h4;
+  color: $secondary-color;
+}
+.value {
+  font-family: $primary-font;
+  font-size: $h4;
+}

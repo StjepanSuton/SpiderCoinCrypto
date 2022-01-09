@@ -1,0 +1,16 @@
+@import "../variables";
+@import "../components";
+.container {
+  margin-top: $padding-value;
+  @include container;
+}
+.general-info {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: calc($padding-value * 2);
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

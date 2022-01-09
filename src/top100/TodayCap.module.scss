@@ -1,0 +1,35 @@
+@import "../variables";
+@import "../components";
+.container {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: $padding-value;
+  margin-bottom: $padding-value;
+}
+.header {
+  font-family: $primary-font;
+  color: $primary-color;
+  font-size: $h1;
+  font-weight: 700;
+  padding: 0.25rem;
+}
+.subheader {
+  font-family: $primary-font;
+  font-size: $h3;
+  color: #58667e;
+  font-weight: 500;
+  padding: 0.25rem;
+}
+.percentage-positive {
+  font-family: $primary-font;
+  color: rgb(46, 150, 1);
+  font-weight: 600;
+}
+.percentage-negative {
+  font-family: $primary-font;
+  color: rgb(255, 25, 12);
+  font-weight: 600;
+}

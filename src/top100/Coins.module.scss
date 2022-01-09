@@ -1,0 +1,34 @@
+@import "../variables";
+@import "../components";
+.coin-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
+  font-family: $primary-font;
+}
+.image {
+  width: 25px;
+  margin-right: $padding-value;
+}
+.symbol {
+  font-family: $primary-font;
+  color: $secondary-color;
+  font-weight: 500;
+  text-decoration: none;
+}
+.numbers {
+  font-family: $primary-font;
+  color: $primary-color;
+  font-weight: 600;
+}
+.percentage-positive {
+  font-family: $primary-font;
+  color: $positive-color;
+  font-weight: 600;
+}
+.percentage-negative {
+  font-family: $primary-font;
+  color: $negative-color;
+  font-weight: 600;
+}

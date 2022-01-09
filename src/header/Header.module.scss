@@ -1,0 +1,54 @@
+@import "../variables";
+@import "../components";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: unset;
+  height: 120px;
+  margin-bottom: $padding-value;
+}
+.small-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @include container;
+  h6 {
+    font-size: $h6;
+    font-family: $primary-font;
+    color: $secondary-color;
+    padding-right: $padding-value;
+  }
+  .smaller-container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+.big-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @include container;
+  .smaller-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.link {
+  text-decoration: none;
+  color: $primary-color;
+  font-size: $h3;
+  font-family: $primary-font;
+  padding-right: $padding-value;
+}
+.image {
+  width: 50px;
+  padding-right: $padding-value;
+}
+.border {
+  width: 100%;
+  border-bottom: solid 0.2px #58667e16;
+}
