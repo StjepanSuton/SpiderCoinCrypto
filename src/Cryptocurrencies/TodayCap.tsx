@@ -21,13 +21,14 @@ function TodayCap() {
   }, []);
   return (
     <div className={classes.container}>
-      <h1 className={classes.header}>
+      <h2 className={classes.header}>
         Today's Cryptocurrency Prices by CoinSpider
-      </h1>
-      <h3 className={classes.subheader}>
+      </h2>
+      <h4 className={classes.subheader}>
         The global crypto market cap is{" "}
         <span>
-          $ {cap && JSON.stringify(cap?.data.total_market_cap.usd).slice(0, 2)}T
+          $ {cap && JSON.stringify(cap?.data.total_market_cap.usd).slice(0, 1)}.
+          {cap && JSON.stringify(cap?.data.total_market_cap.usd).slice(1, 3)}T
         </span>
         , a{" "}
         <span
@@ -44,7 +45,7 @@ function TodayCap() {
             : "decrease"}
         </span>{" "}
         over the last day
-      </h3>
+      </h4>
     </div>
   );
 }

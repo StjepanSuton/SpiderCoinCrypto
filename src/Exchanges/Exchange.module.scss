@@ -1,0 +1,35 @@
+@import "../variables";
+.row {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(7, 7, 7, 0.126);
+  }
+}
+.rank {
+  font-family: $primary-font;
+  font-weight: 500;
+}
+.name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.name {
+  font-weight: bold;
+  font-family: $primary-font;
+}
+.image {
+  margin: 0;
+  width: 25px;
+  margin-right: $padding-value;
+}
+.trust-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.numbers {
+  font-family: $primary-font;
+  color: $primary-color;
+  font-weight: 600;
+}

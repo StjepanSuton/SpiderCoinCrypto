@@ -73,7 +73,7 @@ function OneCoin() {
   const [coinData, setCoinData] = useState<CoinData | null>(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  console.log(coinData);
+
   useEffect(() => {
     setLoading(true);
     axios

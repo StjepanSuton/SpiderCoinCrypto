@@ -1,24 +1,31 @@
 @import "../variables";
 @import "../components";
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: unset;
-  height: 120px;
   margin-bottom: $padding-value;
 }
 .small-container {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border-bottom: solid 0.2px #58667e16;
   @include container;
+
   h6 {
     font-size: $h6;
     font-family: $primary-font;
     color: $secondary-color;
     padding-right: $padding-value;
+  }
+  span {
+    color: rgba(59, 131, 246, 0.735);
   }
   .smaller-container {
     display: flex;
@@ -26,6 +33,9 @@
   }
 }
 .big-container {
+  position: relative;
+  z-index: 1;
+  height: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,10 +55,8 @@
   padding-right: $padding-value;
 }
 .image {
+  display: flex;
+  align-items: center;
   width: 50px;
   padding-right: $padding-value;
-}
-.border {
-  width: 100%;
-  border-bottom: solid 0.2px #58667e16;
 }

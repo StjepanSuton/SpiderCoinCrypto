@@ -1,0 +1,31 @@
+@import "../variables";
+@import "../components";
+.container {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  @include container;
+}
+.title {
+  font-family: $primary-font;
+  font-size: $h1;
+  font-weight: 700;
+  line-height: 42px;
+}
+.subtitle {
+  font-family: $primary-font;
+  font-size: $h4;
+  color: $secondary-color;
+}
+.about-container {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-gap: $padding-value;
+}
+.about-title {
+  font-family: $primary-font;
+  font-size: $h2;
+  font-weight: 700;
+  line-height: 42px;
+}

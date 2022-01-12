@@ -83,7 +83,9 @@ function OneCoinGraph() {
   useEffect(() => {
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`
+        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=${
+          days <= 31 ? "hourly" : "daily"
+        }`
       )
       .then((response) => setChartData(response.data))
       .catch((error) => console.log(error));
@@ -116,8 +118,8 @@ function OneCoinGraph() {
           chartData &&
           chartData?.prices[0][1] >=
             chartData?.prices[chartData.prices.length - 1][1]
-            ? "#ea3943"
-            : "rgb(76, 179, 31)",
+            ? "#ea3942d5"
+            : "rgba(75, 179, 31, 0.818)",
         backgroundColor:
           chartData &&
           chartData?.prices[0][1] >=

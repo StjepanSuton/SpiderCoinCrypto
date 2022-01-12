@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import logo from "../assets/spider-coin.webp";
 import classes from "./Header.module.scss";
 import axios from "axios";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { Link } from "react-router-dom";
+import HeaderSearch from "./HeaderSearch";
+
 interface Mdata {
   data: {
     active_cryptocurrencies: number;
@@ -45,19 +44,32 @@ function Header() {
     <div className={classes.container}>
       <div className={classes["small-container"]}>
         <div className={classes["smaller-container"]}>
-          <h6>{`Cryptos: ${marketdata?.data.active_cryptocurrencies} `}</h6>
-          <h6>{`Exchanges: ${exchanges} `}</h6>
-          <h6>{`Market Cap : $ ${marketdata?.data.total_market_cap.usd.toLocaleString(
-            "en-IN"
-          )} `}</h6>
-          <h6>{`24h Vol: $ ${marketdata?.data.total_volume.usd.toLocaleString(
-            "en-IN"
-          )} `}</h6>
-          <h6>{`Dominance: BTC: ${marketdata?.data.market_cap_percentage.btc.toFixed(
-            2
-          )}% ETH: ${marketdata?.data.market_cap_percentage.eth.toFixed(
-            2
-          )}% `}</h6>
+          <h6>
+            Cryptos:{" "}
+            <span>{`${marketdata?.data.active_cryptocurrencies}`}</span>{" "}
+          </h6>
+          <h6>
+            Exchanges: <span>{`${exchanges}`}</span>{" "}
+          </h6>
+          <h6>
+            Market Cap :{" "}
+            <span>{`$ ${marketdata?.data.total_market_cap.usd.toLocaleString(
+              "en-IN"
+            )}`}</span>{" "}
+          </h6>
+          <h6>
+            24h Vol :{" "}
+            <span>{`$ ${marketdata?.data.total_volume.usd.toLocaleString()}`}</span>{" "}
+          </h6>
+          <h6>
+            Dominance BTC/ETH:{" "}
+            <span>{`${marketdata?.data.market_cap_percentage.btc.toFixed(
+              2
+            )}%`}</span>{" "}
+            <span>{`${marketdata?.data.market_cap_percentage.eth.toFixed(
+              2
+            )}%`}</span>
+          </h6>
         </div>
         <div>
           <DarkModeIcon />
@@ -73,7 +85,7 @@ function Header() {
             <Link className={classes.link} to="/cryptocurrencies">
               <h3>Cryptocurrencies</h3>
             </Link>
-            <Link className={classes.link} to="/Exchanges">
+            <Link className={classes.link} to="/exchanges">
               <h3>Exchanges</h3>
             </Link>
             <Link className={classes.link} to="/portfolio">
@@ -85,22 +97,9 @@ function Header() {
           </div>
         </div>
         <div>
-          <TextField
-            label="Search"
-            margin="normal"
-            size="small"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            InputLabelProps={{ style: { fontSize: 12 } }} // font size of input label
-          />
+          <HeaderSearch />
         </div>
       </div>
-      <span className={classes.border}></span>
     </div>
   );
 }

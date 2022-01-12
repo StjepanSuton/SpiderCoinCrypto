@@ -74,14 +74,18 @@ export const doughnutOptions = {
       display: false,
     },
     tooltip: {
+      padding: 6,
+      caretSize: 7,
+      displayColors: false,
+
       enabled: true,
       titleFont: {
         weight: "0",
       },
       bodyFont: {
-        size: 8.5,
+        size: 9,
       },
-      boxWidth: 2,
+      boxWidth: 0.0001,
     },
     title: {
       display: false,

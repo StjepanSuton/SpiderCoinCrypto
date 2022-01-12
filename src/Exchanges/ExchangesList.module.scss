@@ -1,0 +1,12 @@
+@import "../variables";
+@import "../components";
+
+.container {
+  @include container;
+  margin-top: $padding-value;
+}
+.title {
+  font-family: $primary-font;
+  font-size: $h2;
+  margin-bottom: $padding-value;
+}

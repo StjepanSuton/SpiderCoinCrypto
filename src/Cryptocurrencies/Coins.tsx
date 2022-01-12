@@ -4,9 +4,6 @@ import classes from "./Coins.module.scss";
 import { Doughnut, Line } from "react-chartjs-2";
 import { lineOptions, doughnutOptions } from "./GraphOptions";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addLink } from "../store/linkStore";
-
 interface Coin {
   id: string;
   image: string;
@@ -25,15 +22,17 @@ interface Coin {
 
 function Coins(props: Coin) {
   let navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const getLink = (): void => {
-    dispatch(addLink(props.symbol));
     navigate(`/cryptocurrencies/${props.id}`);
   };
 
   return (
-    <TableRow onClick={getLink} key={props.market_cap_rank}>
+    <TableRow
+      className={classes.row}
+      onClick={getLink}
+      key={props.market_cap_rank}
+    >
       <TableCell align="center">
         {" "}
         <span className={classes.symbol}>{props.market_cap_rank}</span>
@@ -75,10 +74,10 @@ function Coins(props: Coin) {
           "en-IN"
         )}`}</span>
       </TableCell>
-      <TableCell size="small" align="center">
+      <TableCell style={{ padding: 0 }} size="small" align="center">
         <Doughnut
           style={{
-            maxWidth: 130,
+            maxWidth: 150,
             maxHeight: 50,
             marginTop: 5,
             display: "unset",
@@ -86,7 +85,7 @@ function Coins(props: Coin) {
           options={doughnutOptions}
           data={{
             labels: [
-              "Used",
+              "Circ",
               props.total_supply - props.circulating_supply <= 0
                 ? []
                 : "Supply",

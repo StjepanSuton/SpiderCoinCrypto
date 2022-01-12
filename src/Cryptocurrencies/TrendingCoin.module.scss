@@ -1,0 +1,25 @@
+@import "../variables";
+.container {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  align-content: space-around;
+  justify-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.167);
+  border-radius: 4px;
+  width: 170px;
+  height: 150px;
+  cursor: pointer;
+}
+.image {
+  width: 40px;
+}
+.info {
+  font-size: $h4;
+  font-family: $primary-font;
+  color: $secondary-color;
+  font-weight: 500;
+}
+.value {
+  font-size: $h4;
+  font-family: $primary-font;
+}

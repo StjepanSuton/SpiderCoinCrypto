@@ -11,6 +11,12 @@
   width: 25px;
   margin-right: $padding-value;
 }
+.row {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(7, 7, 7, 0.126);
+  }
+}
 .symbol {
   font-family: $primary-font;
   color: $secondary-color;
