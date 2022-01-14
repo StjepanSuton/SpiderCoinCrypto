@@ -53,7 +53,7 @@ function IntroPage() {
               We take data security and privacy very seriously.
             </h4>
           </div>
-          <Portfolio />
+          <Portfolio key={1} />
         </div>
       </div>
     </div>

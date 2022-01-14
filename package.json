@@ -24,6 +24,7 @@
     "framer-motion": "^5.5.5",
     "html-react-parser": "^1.4.5",
     "material-icons": "^1.10.4",
+    "moment": "^2.29.1",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.0",

@@ -24,17 +24,16 @@ function HeaderSearch() {
   const [coinName, setCoinName] = useState<CoinsSimple | null>(null);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/${
-          inputValue === "" ? "d" : inputValue
-        }?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`
-      )
-      .then((response) => {
-        setCoinName(response.data);
-        setResult(true);
-      })
-      .catch((error) => setResult(false));
+    if (inputValue.length < 2)
+      axios
+        .get(
+          `https://api.coingecko.com/api/v3/coins/${inputValue}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`
+        )
+        .then((response) => {
+          setCoinName(response.data);
+          setResult(true);
+        })
+        .catch((error) => setResult(false));
   }, [inputValue]);
 
   const outFocus = () => {
@@ -69,7 +68,7 @@ function HeaderSearch() {
       </div>
       {focus &&
         (result === true ? (
-          <div onClick={getLink} className={classes["small-container2"]}>
+          <div key={coinName?.image.small} onClick={getLink} className={classes["small-container2"]}>
             <div className={classes["small-container3"]}>
               <img
                 className={classes.image}

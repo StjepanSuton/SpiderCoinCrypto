@@ -32,7 +32,7 @@ function ExchangesList() {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(exchangeData);
+  
   const exchangeList =
     exchangeData &&
     exchangeData.map((exchange, i) => (

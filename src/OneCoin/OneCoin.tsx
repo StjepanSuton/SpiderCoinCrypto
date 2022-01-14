@@ -9,6 +9,7 @@ import OneCoinGraph from "./OneCoinGraph";
 import CoinQuickStats from "./CoinQuickStats";
 
 interface CoinData {
+  id: string;
   categories: string[];
   market_cap_rank: number;
   description: {
@@ -72,15 +73,20 @@ interface CoinData {
 function OneCoin() {
   const [coinData, setCoinData] = useState<CoinData | null>(null);
   const [loading, setLoading] = useState(true);
+ 
   const { id } = useParams();
-
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
-      .then((response) => setCoinData(response.data))
-      .catch((error) => console.log(error));
-    setLoading(false);
+    //cleanup
+    if (coinData !== null && coinData.id !== id) {
+      setCoinData(null);
+    } else {
+      axios
+        .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
+        .then((response) => setCoinData(response.data))
+        .catch((error) => console.log(error));
+      setLoading(false);
+    }
   }, [id]);
 
   const generalInfo = coinData && (

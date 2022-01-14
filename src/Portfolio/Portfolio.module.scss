@@ -1,0 +1,74 @@
+@import "../variables";
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+.input-resault {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.title-image-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.image {
+  width: 25px;
+  margin-right: $padding-value;
+}
+.title {
+  font-family: $primary-font;
+  font-size: $h2;
+}
+.rank {
+  font-family: $primary-font;
+  font-size: $h4;
+  color: $secondary-color;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 600;
+  height: 400;
+}
+.label {
+  margin-top: $padding-value;
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h4;
+}
+.input {
+  width: 90%;
+  border: 1px solid rgba(0, 0, 0, 0.167);
+  margin-top: $padding-value;
+  padding: calc($padding-value/2);
+  &:focus {
+    border: 0.5px solid rgba(0, 0, 0, 0.461);
+  }
+}
+.button {
+  margin-top: $padding-value;
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h4;
+  background-color: rgba(0, 0, 0, 0.167);
+  border: 0.5px solid rgba(0, 0, 0, 0.461);
+  border-radius: 4px;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.error {
+  color: $negative-color;
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h6;
+}

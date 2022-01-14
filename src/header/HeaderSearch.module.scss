@@ -17,10 +17,10 @@
 }
 .input {
   border: 1px solid rgba(0, 0, 0, 0.167);
-  background-color: rgba(7, 7, 7, 0.126);
+
   padding: calc($padding-value/2);
   &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.461);
+    border: 0.5px solid rgba(0, 0, 0, 0.461);
   }
 }
 .small-container2 {

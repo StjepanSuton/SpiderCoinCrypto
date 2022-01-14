@@ -1,6 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import classes from "./Portfolio.module.scss";
+import Backdrop from "@mui/material/Backdrop";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
 import axios from "axios";
+import PortfolioData from "./PortfolioData";
 
 interface SearchedCoin {
   id: string;
@@ -21,130 +26,170 @@ interface PurchasedCoin {
   id: string;
   name: string;
   date_purchased: number;
+  differenceInDays: number;
   amount_purchased: number;
-  prices_by_dates: number[];
+  image: string;
+  purchase_price: number;
 }
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 4,
+};
 
 function Portfolio() {
+  //Form Data
   const [inputValue, setInputValue] = useState("");
-  const [focus, setFocus] = useState(false);
+  const [amountValue, setAmountValue] = useState(1);
+  const [dateValue, setDateValue] = useState("");
+  //SearchedCoin Results
+  const [searchedCoin, setSetSearchedCoin] = useState<SearchedCoin | null>(
+    null
+  );
+  const [purchasePrice, setPurchasePrice] = useState(0);
   const [result, setResult] = useState(false);
-  const [searchedCoin, setSearchedCoin] = useState<SearchedCoin | null>(null);
+  //Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  //PurchasedCoins
+  const [purchasedCoins, setPurchasedCoins] = useState<PurchasedCoin[]>([]);
 
-  const [show1, setShow1] = useState<any>();
-  const [show2, setShow2] = useState<any>();
-  const [value, setValue] = useState<any>(0);
-  const [days, setDays] = useState<number>(0);
-
+  //Get data for searched Coin
   useEffect(() => {
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/${inputValue}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
-      )
-      .then((response) => {
-        setSearchedCoin(response.data);
-        setResult(true);
-      })
-      .catch((error) => setResult(false));
+    if (inputValue.length < 4 || inputValue.length > 15) {
+      return;
+    } else {
+      axios
+        .get(
+          `https://api.coingecko.com/api/v3/coins/${inputValue}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
+        )
+        .then((response) => {
+          setSetSearchedCoin(response.data);
+          setResult(true);
+        })
+        .catch((error) => setResult(false));
+    }
   }, [inputValue]);
 
-  const outFocus = () => {
-    setTimeout(() => {
-      setFocus(false);
-    }, 300);
-    setInputValue("");
-  };
-
-  const handleUserInput = (e: any) => {
-    //prevent to many Api calls
-    if (e.target.value.length < 2) return;
-    else {
-      setInputValue(e.target.value);
-      setFocus(true);
-    }
-  };
-
+  //Get Price for searched Coin on a ceratin date
   useEffect(() => {
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/tether/market_chart?vs_currency=usd&days=${days}&interval=daily`
-      )
-      .then((response) => {
-        setShow1(response.data.prices);
-      })
-      .catch((error) => console.log(error));
-  }, [days]);
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=90&interval=daily`
-      )
-      .then((response) => {
-        setShow2(response.data.prices);
-      })
-      .catch((error) => console.log(error));
-  }, [days]);
-
-  const getsomething = (e: any) => {
-    setValue(Date.parse(new Date(e.target.value).toString()));
-  };
-
-  //razlika u danima od danas i upisanog dana
-  useEffect(() => {
-    if (value !== 0) {
-      setDays(
-        Math.floor(
-          (Date.parse(new Date().toString()) / 1000 - value / 1000) / 86400
+    if (dateValue === "") {
+      return;
+    } else {
+      //getting the right date format
+      const date = dateValue.split(/\-/);
+      const rightDateFormat = [date[2], date[1], date[0]].join("-");
+      axios
+        .get(
+          `https://api.coingecko.com/api/v3/coins/${inputValue}/history?date=${rightDateFormat}&localization=false`
         )
-      );
+        .then((response) => {
+          setPurchasePrice(response.data.market_data.current_price.usd);
+        })
+        .catch((error) => console.log(error));
     }
-  }, [value]);
-  /*
-  console.log(
-    show2 &&
-      (show2 !== undefined
-        ? show2.findIndex((element: any) => element[0] === show1[0][0])
-        : "")
-  );
-  console.log(
-    show2 &&
-      show2[
-        show2 !== undefined
-          ? show2.findIndex((element: any) => element[0] === show1[0][0])
-          : ""
-      ]
-  );
-*/
+  }, [inputValue, dateValue]);
+
+
+  //Form handeling
+  const handleFormSubimt: React.FormEventHandler<HTMLFormElement> = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+    const amount = amountValue;
+    const date = dateValue;
+    if (result === true && amount > 0 && Date.parse(date) <= Date.now()) {
+      console.log("Form sucesfully submited");
+      setOpen(false);
+      setInputValue("");
+      setAmountValue(1);
+      setDateValue("");
+      if (searchedCoin) {
+        //How many days passed from purchase till todays Date
+        const differenceInDays = Math.floor(
+          (Date.parse(new Date().toString()) / 1000 - Date.parse(date) / 1000) /
+            86400
+        );
+        const coin: PurchasedCoin = {
+          id: searchedCoin?.id,
+          name: searchedCoin?.name,
+          amount_purchased: amountValue,
+          date_purchased: Date.parse(date),
+          differenceInDays: differenceInDays,
+          image: searchedCoin.image.small,
+          purchase_price: purchasePrice,
+        };
+        setPurchasedCoins((prevState) => {
+          return [coin, ...prevState];
+        });
+      }
+    } else {
+      console.log("Bad");
+    }
+  };
+
   return (
     <div>
-      <input
-        onClick={handleUserInput}
-        type="text"
-        placeholder="Search crypto by id"
-      ></input>
-      <button>Search</button>
-      {focus &&
-        (result === true ? (
-          <div className={classes["small-container2"]}>
-            <div className={classes["small-container3"]}>
-              <img
-                className={classes.image}
-                src={searchedCoin?.image.small}
-                alt="coin"
-              />
-              <h4 className={classes.title}>{searchedCoin?.name}</h4>
-            </div>
-            <h6
-              className={classes.rank}
-            >{`# ${searchedCoin?.market_cap_rank}`}</h6>
-          </div>
-        ) : (
-          <div className={classes["small-container2"]}>
-            <h4 className={classes.title}>No coin under that id</h4>
-          </div>
-        ))}
-      <input onChange={getsomething} type="date"></input>
+      <button onClick={handleOpen}>modal</button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <form onSubmit={handleFormSubimt} className={classes.form}>
+              <label className={classes.label}>Coin id:</label>
+              <input
+                className={classes.input}
+                value={inputValue}
+                onChange={(e) =>
+                  setInputValue(e.target.value.toLocaleLowerCase().trim())
+                }
+                type="search"
+                required
+              ></input>
+              {inputValue && result === false ? (
+                <h6 className={classes.error}>Unsupported id</h6>
+              ) : (
+                ""
+              )}
+              <label className={classes.label}>Amount purchased:</label>
+              <input
+                className={classes.input}
+                value={amountValue}
+                onChange={(e) => setAmountValue(e.target.valueAsNumber)}
+                type="number"
+              ></input>
+              {amountValue <= 0 ? (
+                <h6 className={classes.error}>Amount cant be 0</h6>
+              ) : (
+                ""
+              )}
+              <label className={classes.label}>Date Purchased:</label>
+              <input
+                className={classes.input}
+                onChange={(e) => setDateValue(e.target.value)}
+                type="date"
+              ></input>
+              <button className={classes.button}>Submit </button>
+            </form>
+          </Box>
+        </Fade>
+      </Modal>
+      <PortfolioData purchasedCoins={purchasedCoins} />
     </div>
   );
 }
