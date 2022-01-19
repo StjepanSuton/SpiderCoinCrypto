@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "./TodayCap.module.scss";
 import axios from "axios";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 interface Payload {
   data: {
@@ -14,10 +16,18 @@ interface Payload {
 function TodayCap() {
   const [cap, setCap] = useState<Payload | null>(null);
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
-      .get("https://api.coingecko.com/api/v3/global")
+      .get("https://api.coingecko.com/api/v3/global", {
+        cancelToken: source.token,
+        timeout: 5000,
+      })
       .then((response) => setCap(response.data))
       .catch((error) => console.log(error));
+    return () => {
+      setCap(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
   return (
     <div className={classes.container}>
@@ -38,8 +48,10 @@ function TodayCap() {
               : classes["percentage-negative"]
           }
         >
-          {" "}
-          {cap?.data.market_cap_change_percentage_24h_usd.toFixed(2)}%{" "}
+          {cap?.data.market_cap_change_percentage_24h_usd
+            .toFixed(2)
+            .replace(/-(?=\d)/, "")}
+          %{" "}
           {cap && cap?.data.market_cap_change_percentage_24h_usd >= 0
             ? "increase"
             : "decrease"}

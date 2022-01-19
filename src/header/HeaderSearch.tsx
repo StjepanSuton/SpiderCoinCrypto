@@ -18,34 +18,41 @@ interface CoinsSimple {
 function HeaderSearch() {
   const navigate = useNavigate();
 
-  const [inputValue, setInputValue] = useState("");
-  const [focus, setFocus] = useState(false);
-  const [result, setResult] = useState(false);
+  const [inputValueSearch, setInputValueSearch] = useState("");
+  const [focusSearch, setFocusSearch] = useState(false);
+  const [resultSearch, setResultSearch] = useState(false);
   const [coinName, setCoinName] = useState<CoinsSimple | null>(null);
-
   useEffect(() => {
-    if (inputValue.length < 2)
+    let source = axios.CancelToken.source();
+    if (inputValueSearch.length > 2)
       axios
         .get(
-          `https://api.coingecko.com/api/v3/coins/${inputValue}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`
+          `https://api.coingecko.com/api/v3/coins/${inputValueSearch}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`,
+          {
+            cancelToken: source.token,
+            timeout: 5000,
+          }
         )
         .then((response) => {
           setCoinName(response.data);
-          setResult(true);
+          setResultSearch(true);
         })
-        .catch((error) => setResult(false));
-  }, [inputValue]);
+        .catch((error) => setResultSearch(false));
+    return () => {
+      source.cancel("Canceling in cleanup");
+    };
+  }, [inputValueSearch]);
 
-  const outFocus = () => {
+  const outFocusSearch = () => {
     setTimeout(() => {
-      setFocus(false);
+      setFocusSearch(false);
     }, 300);
-    setInputValue("");
+    setInputValueSearch("");
   };
 
   const handleUserInput = (e: any) => {
-    setInputValue(e.target.value);
-    setFocus(true);
+    setFocusSearch(true);
+    setInputValueSearch(e.target.value);
   };
 
   const getLink = (): void => {
@@ -53,22 +60,26 @@ function HeaderSearch() {
   };
 
   return (
-    <div className={classes.container} onBlur={outFocus}>
+    <div className={classes.container} onBlur={outFocusSearch}>
       <div className={classes["small-container"]}>
         <SearchIcon />
         <motion.input
           transition={{ duration: 0.5 }}
           whileFocus={{ width: 250 }}
           className={classes.input}
+          value={inputValueSearch}
           onChange={handleUserInput}
-          value={inputValue}
           placeholder="Search crypto by id"
           type="text"
         ></motion.input>
       </div>
-      {focus &&
-        (result === true ? (
-          <div key={coinName?.image.small} onClick={getLink} className={classes["small-container2"]}>
+      {focusSearch &&
+        (resultSearch === true ? (
+          <div
+            key={coinName?.image.small}
+            onClick={getLink}
+            className={classes["small-container2"]}
+          >
             <div className={classes["small-container3"]}>
               <img
                 className={classes.image}

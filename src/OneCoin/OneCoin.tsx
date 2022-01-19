@@ -73,24 +73,36 @@ interface CoinData {
 function OneCoin() {
   const [coinData, setCoinData] = useState<CoinData | null>(null);
   const [loading, setLoading] = useState(true);
- 
+
   const { id } = useParams();
   useEffect(() => {
     setLoading(true);
+    let source = axios.CancelToken.source();
     //cleanup
     if (coinData !== null && coinData.id !== id) {
       setCoinData(null);
     } else {
       axios
-        .get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
+        .get(
+          `https://api.coingecko.com/api/v3/coins/${id}?localization=false`,
+          {
+            cancelToken: source.token,
+            timeout: 5000,
+          }
+        )
         .then((response) => setCoinData(response.data))
         .catch((error) => console.log(error));
       setLoading(false);
     }
+    return () => {
+      setCoinData(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, [id]);
 
   const generalInfo = coinData && (
     <CoinGeneralInfo
+    id={coinData.id}
       rank={coinData?.market_cap_rank}
       image={coinData?.image.small}
       name={coinData?.name}

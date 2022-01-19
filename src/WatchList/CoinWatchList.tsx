@@ -1,11 +1,11 @@
 import { useCallback } from "react";
+import classes from "./CoinWatchList.module.scss";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import classes from "./Coins.module.scss";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { Doughnut, Line } from "react-chartjs-2";
-import { lineOptions, doughnutOptions } from "./GraphOptions";
+import { lineOptions, doughnutOptions } from "../Cryptocurrencies/GraphOptions";
 import { Link, useNavigate } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -27,13 +27,13 @@ interface Coin {
   };
 }
 
-function Coins(props: Coin) {
+function CoinsWatchlist(props: Coin) {
   const showBookmark = useSelector((state: RootState) => state.coins);
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const getLink = (): void => {
-    navigate(`/cryptocurrencies/${props.id}`);
+    navigate(`/cryptocurrencies/${props.id}`, { replace: true });
   };
 
   const onAddCoin = useCallback(() => {
@@ -172,4 +172,4 @@ function Coins(props: Coin) {
   );
 }
 
-export default Coins;
+export default CoinsWatchlist;

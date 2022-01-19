@@ -1,11 +1,16 @@
-import React from "react";
+import { useCallback } from "react";
 import classes from "./CoinGeneralInfo.module.scss";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+
 import { styled } from "@mui/material/styles";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-interface GeneralInfro {
+import { useSelector, useDispatch } from "react-redux";
+import { addCoinToWatchList, RootState } from "../store/WatchListStore";
+interface GeneralInfo {
+  id: string;
   rank: number;
   image: string;
   name: string;
@@ -38,13 +43,26 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-function CoinGeneralInfo(props: GeneralInfro) {
+function CoinGeneralInfo(props: GeneralInfo) {
+  const showBookmark = useSelector((state: RootState) => state.coins);
+  const dispatch = useDispatch();
+  const onAddCoin = useCallback(() => {
+    dispatch(addCoinToWatchList(props.id));
+  }, [dispatch]);
   return (
     <div>
       <h4 className={classes.rank}>{`Rank: #${props.rank}`}</h4>
       <div className={classes["first-box"]}>
         <img className={classes.image} src={props.image} />
         <h2 className={classes.name}>{props.name}</h2>
+        {showBookmark.find((item) => item === props.id) ? (
+          <BookmarkIcon style={{ fontSize: 32 }} onClick={onAddCoin} />
+        ) : (
+          <BookmarkBorderOutlinedIcon
+            style={{ fontSize: 32 }}
+            onClick={onAddCoin}
+          />
+        )}
       </div>
       <div className={classes["second-box"]}>
         <h1 className={classes.price}>{`$${props.price.toLocaleString("en-IN", {

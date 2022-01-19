@@ -23,21 +23,38 @@ function TrendingList() {
   const [trending, setTrending] = useState<Trending | null>(null);
 
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
-      .get("https://api.coingecko.com/api/v3/search/trending")
+      .get("https://api.coingecko.com/api/v3/search/trending", {
+        cancelToken: source.token,
+        timeout: 5000,
+      })
       .then((response) => setTrending(response.data))
       .catch((error) => console.log(error));
+    return () => {
+      setTrending(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
   const [btcPrice, setBtcPrice] = useState(0);
 
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
       .get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`
+        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
+        {
+          cancelToken: source.token,
+          timeout: 5000,
+        }
       )
       .then((response) => setBtcPrice(response.data.bitcoin.usd))
       .catch((error) => console.log(error));
+    return () => {
+      setBtcPrice(0);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
   const trendingList = trending?.coins.map((coin, i) => (
@@ -52,7 +69,6 @@ function TrendingList() {
       btc_price={btcPrice}
     />
   ));
-
 
   return (
     <div className={classes.container}>

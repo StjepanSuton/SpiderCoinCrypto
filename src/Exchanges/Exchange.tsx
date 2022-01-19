@@ -38,18 +38,30 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 function Exchange(props: Exchanges) {
+
   let navigate = useNavigate();
+  
   const [btcPrice, setBtcPrice] = useState<number | null>(null);
+
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
       .get(
         `https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false
-  `
+  `,
+        {
+          cancelToken: source.token,
+          timeout: 5000,
+        }
       )
       .then((response) =>
         setBtcPrice(response.data.market_data.current_price.usd)
       )
       .catch((error) => console.log(error));
+    return () => {
+      setBtcPrice(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
   const getLink = (): void => {

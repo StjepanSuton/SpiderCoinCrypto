@@ -4,9 +4,27 @@
 .container {
   @include container;
   margin-top: $padding-value;
+  padding: $padding-value;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 .title {
   font-family: $primary-font;
   font-size: $h2;
   margin-bottom: $padding-value;
+}
+.subtitle {
+  width: 70%;
+  font-family: $primary-font;
+  font-size: $h6;
+  color: $secondary-color;
+  font-weight: 700;
+  line-height: $padding-value;
+  margin-bottom: $padding-value;
+  a {
+    text-decoration: none;
+    color: rgba(59, 131, 246, 0.735);
+    &:hover {
+      color: rgb(59, 131, 246);
+    }
+  }
 }

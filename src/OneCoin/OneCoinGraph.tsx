@@ -145,7 +145,7 @@ function OneCoinGraph() {
                 return color;
               },
 
-        fill: true, // 0: fill to 'origin'
+        fill: true,
       },
     ],
   };

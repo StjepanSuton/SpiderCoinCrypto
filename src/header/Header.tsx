@@ -27,17 +27,33 @@ function Header() {
   const [marketdata, setMarketData] = useState<Mdata | null>(null);
   const [exchanges, setExchanges] = useState<number | null>(null);
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
-      .get("https://api.coingecko.com/api/v3/global")
+      .get("https://api.coingecko.com/api/v3/global", {
+        cancelToken: source.token,
+        timeout: 5000,
+      })
       .then((response) => setMarketData(response.data))
       .catch((error) => console.log(error));
+    return () => {
+      setMarketData(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
-      .get("https://api.coingecko.com/api/v3/exchanges/list")
+      .get("https://api.coingecko.com/api/v3/exchanges/list", {
+        cancelToken: source.token,
+        timeout: 5000,
+      })
       .then((response) => setExchanges(response.data.length))
       .catch((error) => console.log(error));
+    return () => {
+      setExchanges(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
   return (

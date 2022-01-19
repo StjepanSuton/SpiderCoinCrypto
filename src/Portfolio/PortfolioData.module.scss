@@ -1,0 +1,165 @@
+@import "../variables";
+@import "../components";
+.container {
+  @include container;
+  width: 100%;
+}
+.title {
+  margin-top: $padding-value;
+  margin-bottom: $padding-value;
+  font-family: $primary-font;
+  font-size: $h2;
+  font-weight: bold;
+}
+.small-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  h4 {
+    font-family: $primary-font;
+    font-size: $h4;
+    font-weight: 500;
+    color: $secondary-color;
+    margin-bottom: $padding-value;
+  }
+  h1 {
+    margin-bottom: $padding-value;
+    font-family: $primary-font;
+    font-size: $h1;
+    font-weight: bold;
+  }
+}
+
+.button-add {
+  margin-right: $padding-value;
+  margin-left: $padding-value;
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h4;
+  border: 0.5px solid rgba(255, 255, 255, 0.461);
+  border-radius: 4px;
+  color: rgb(254, 254, 254);
+  padding: $padding-value;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: $positive-color;
+}
+.button-clear {
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h4;
+  border: 0.5px solid rgba(255, 255, 255, 0.461);
+  border-radius: 4px;
+  color: rgb(254, 254, 254);
+  padding: $padding-value;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: $negative-color;
+}
+.graph-container {
+  display: grid;
+  grid-template-columns: 4.5fr 1fr;
+  grid-gap: $padding-value;
+}
+.line {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  h4 {
+    font-family: $primary-font;
+    font-size: $h4;
+    font-weight: bold;
+    color: $secondary-color;
+    margin-bottom: $padding-value;
+  }
+}
+.diversity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h4 {
+    justify-self: flex-start;
+    font-family: $primary-font;
+    font-size: $h4;
+    font-weight: bold;
+    color: $secondary-color;
+    margin-bottom: $padding-value;
+    margin-top: $padding-value;
+  }
+  .graph {
+    width: 70%;
+    margin-bottom: $padding-value;
+  }
+}
+.purchase-history {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: $padding-value;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  h4 {
+    font-family: $primary-font;
+    font-size: $h4;
+    font-weight: bold;
+    color: $secondary-color;
+    margin-bottom: $padding-value;
+  }
+  h6 {
+    font-family: $primary-font;
+    font-size: $h6;
+    font-weight: bold;
+    color: $primary-color;
+  }
+  img {
+    width: 25px;
+    margin-right: $padding-value;
+  }
+  .name-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.table-container {
+  padding: $padding-value;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  .subtitle {
+    font-family: $primary-font;
+    font-size: $h4;
+    font-weight: bold;
+    color: $secondary-color;
+    margin-top: $padding-value;
+    margin-bottom: $padding-value;
+  }
+  h4 {
+    font-family: $primary-font;
+    font-size: $h4;
+    font-weight: bold;
+    color: $primary-color;
+  }
+  h6 {
+    font-family: $primary-font;
+    font-size: $h6;
+    font-weight: bold;
+    color: $primary-color;
+  }
+  img {
+    width: 25px;
+    margin-right: $padding-value;
+  }
+  .name-image {
+    display: flex;
+    flex-direction: row;
+  }
+}

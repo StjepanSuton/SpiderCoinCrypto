@@ -26,13 +26,20 @@ function ExchangesList() {
   const [exchangeData, setExchangeData] = useState<ExchangeData[] | null>(null);
 
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
-      .get("https://api.coingecko.com/api/v3/exchanges?per_page=100")
+      .get("https://api.coingecko.com/api/v3/exchanges?per_page=100", {
+        cancelToken: source.token,
+        timeout: 5000,
+      })
       .then((response) => setExchangeData(response.data))
       .catch((error) => console.log(error));
+    return () => {
+      setExchangeData(null);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
-  
   const exchangeList =
     exchangeData &&
     exchangeData.map((exchange, i) => (
@@ -56,13 +63,19 @@ function ExchangesList() {
       <h2 className={classes.title}>
         Top Cryptocurrency Exchanges Ranking by Trust Score
       </h2>
+      <h6 className={classes.subtitle}>
+        To combat fake exchange volume data, we’ve developed our rating
+        algorithm called “Trust Score.” Ever since its inception in May 2019,
+        we’ve successfully revamped all rankings of our own and subsequently led
+        the upgrade industry-wide to start measuring by liquidity rather than
+        reported numbers. Read the{" "}
+        <a href="https://blog.coingecko.com/trust-score-explained/">
+          metodology
+        </a>{" "}
+        to learn more about trust score
+      </h6>
       <TableContainer style={{ overflow: "visible" }}>
         <Table stickyHeader>
-          {/*{
-      [`& .${tableCellClasses.root}`]: {
-        borderBottom: "none",
-      },
-    }*/}
           <TableHead>
             <TableRow>
               <TableCell align="center">

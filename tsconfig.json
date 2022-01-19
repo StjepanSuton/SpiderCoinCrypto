@@ -17,5 +17,6 @@
     "jsx": "react-jsx",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
+  "downlevelIteration": true,
   "include": ["src", "typing.d.ts", "typing.d.ts"]
 }

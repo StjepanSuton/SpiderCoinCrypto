@@ -1,31 +1,101 @@
 @import "../variables";
 @import "../components";
 .container {
+  position: relative;
   height: 80vh;
   display: flex;
   align-items: center;
   flex-direction: row;
+  justify-content: space-between;
+
   @include container;
+}
+.title-container {
+  height: 80%;
+  width: 60%;
+  margin-right: $padding-value;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: calc($padding-value * 2);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.image {
+  margin-bottom: $padding-value;
+}
+.uptitle {
+  font-family: $primary-font;
+  color: $secondary-color;
+  font-size: $h2;
+  font-weight: 600;
+  line-height: 42px;
 }
 .title {
   font-family: $primary-font;
-  font-size: $h1;
+  font-size: 52px;
   font-weight: 700;
-  line-height: 42px;
 }
 .subtitle {
   font-family: $primary-font;
   font-size: $h4;
   color: $secondary-color;
+  font-weight: 500;
+  margin-top: $padding-value;
+  margin-bottom: $padding-value;
 }
 .about-container {
+  height: 80%;
   display: grid;
   grid-template-columns: 2fr 2fr;
-  grid-gap: $padding-value;
+  grid-gap: calc($padding-value/2);
+  padding: calc($padding-value * 2);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  h4 {
+    font-family: $primary-font;
+    font-size: $h4;
+    color: $secondary-color;
+    font-weight: 500;
+  }
 }
 .about-title {
   font-family: $primary-font;
   font-size: $h2;
   font-weight: 700;
-  line-height: 42px;
+  line-height: 32px;
+}
+.button {
+  width: 200px;
+  align-self: flex-start;
+  margin-top: $padding-value;
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h4;
+  background-color: rgba(0, 0, 0, 0.167);
+  border: 0.5px solid rgba(0, 0, 0, 0.461);
+  border-radius: 4px;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.button2 {
+  width: 200px;
+  align-self: flex-start;
+  margin-top: $padding-value;
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: $h4;
+  background-color: transparent;
+  border: none;
+  color: $primary-color;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
 }

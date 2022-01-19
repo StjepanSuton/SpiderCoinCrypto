@@ -7,20 +7,49 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import Coins from "./Coins";
 import TodayCap from "./TodayCap";
 import TrendingList from "./TrendingList";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+
+interface Coin {
+  id: string;
+  image: string;
+  name: string;
+  symbol: string;
+  current_price: number;
+  market_cap: number;
+  market_cap_rank: number;
+  price_change_percentage_24h: number;
+  circulating_supply: number;
+  total_supply: number;
+  sparkline_in_7d: {
+    price: number[];
+  };
+}
 
 function Top100() {
   const [top100, setTop100] = useState([]);
   const [clicked, setClicked] = useState(0);
   useEffect(() => {
+    let source = axios.CancelToken.source();
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h%2C7d        "
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h%2C7d",
+        {
+          cancelToken: source.token,
+          timeout: 5000,
+        }
       )
       .then((response) => setTop100(response.data))
       .catch((error) => console.log(error));
+
+    return () => {
+      setTop100([]);
+      source.cancel("Canceling in cleanup");
+    };
   }, []);
 
   useMemo(() => {
@@ -63,22 +92,6 @@ function Top100() {
     }
   }, [top100, clicked]);
 
-  interface Coin {
-    id: string;
-    image: string;
-    name: string;
-    symbol: string;
-    current_price: number;
-    market_cap: number;
-    market_cap_rank: number;
-    price_change_percentage_24h: number;
-    circulating_supply: number;
-    total_supply: number;
-    sparkline_in_7d: {
-      price: number[];
-    };
-  }
-
   const coinList = top100.map((coin: Coin) => (
     <Coins
       id={coin.id}
@@ -103,18 +116,27 @@ function Top100() {
         <TodayCap />
         <TableContainer style={{ overflow: "visible" }}>
           <Table stickyHeader>
-            {/*{
-              [`& .${tableCellClasses.root}`]: {
-                borderBottom: "none",
-              },
-            }*/}
             <TableHead>
               <TableRow>
+                <TableCell align="center">
+                  <BookmarkBorderOutlinedIcon />
+                </TableCell>
                 <TableCell align="center">
                   <h4
                     onClick={() => setClicked(clicked === 0 ? 1 : 0)}
                     className={classes.header}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                    }}
                   >
+                    {clicked === 1 ? (
+                      <ArrowDropUpIcon />
+                    ) : (
+                      <ArrowDropDownIcon />
+                    )}
                     #
                   </h4>
                 </TableCell>
@@ -129,6 +151,11 @@ function Top100() {
                     onClick={() => setClicked(clicked === 2 ? 3 : 2)}
                     className={classes.header}
                   >
+                    {clicked === 3 ? (
+                      <ArrowDropUpIcon />
+                    ) : (
+                      <ArrowDropDownIcon />
+                    )}
                     Price
                   </h4>
                 </TableCell>
@@ -137,6 +164,11 @@ function Top100() {
                     onClick={() => setClicked(clicked === 4 ? 5 : 4)}
                     className={classes.header}
                   >
+                    {clicked === 5 ? (
+                      <ArrowDropUpIcon />
+                    ) : (
+                      <ArrowDropDownIcon />
+                    )}
                     24h%
                   </h4>
                 </TableCell>
@@ -145,6 +177,11 @@ function Top100() {
                     onClick={() => setClicked(clicked === 0 ? 1 : 0)}
                     className={classes.header}
                   >
+                    {clicked === 1 ? (
+                      <ArrowDropUpIcon />
+                    ) : (
+                      <ArrowDropDownIcon />
+                    )}
                     Market Cap
                   </h4>
                 </TableCell>
