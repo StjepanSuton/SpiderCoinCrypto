@@ -14,6 +14,7 @@ function App() {
     <div className={classes.container}>
       <Header />
       <Routes>
+        <Route path="*" element={<Top100 />} />
         <Route path={"/cryptocurrencies/"} element={<Top100 />} />
         <Route path={`/cryptocurrencies/:id`} element={<OneCoin />} />
         <Route path={"/exchanges/"} element={<ExchangesList />} />
