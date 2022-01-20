@@ -69,7 +69,7 @@ function Coins(props: Coin) {
       </TableCell>
       <TableCell align="right">
         <span className={classes.numbers}>
-          {`$ ${props.current_price.toLocaleString("en-IN", {
+          {`$ ${props.current_price.toLocaleString("en-GB", {
             maximumSignificantDigits: 6,
             maximumFractionDigits: 0,
           })}`}
@@ -97,7 +97,7 @@ function Coins(props: Coin) {
       </TableCell>
       <TableCell align="right">
         <span className={classes.numbers}>{`$ ${props.market_cap.toLocaleString(
-          "en-IN"
+          "en-GB"
         )}`}</span>
       </TableCell>
       <TableCell style={{ padding: 0 }} size="small" align="center">
