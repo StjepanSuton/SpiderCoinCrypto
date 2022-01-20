@@ -16,7 +16,7 @@ function TrendingCoin(props: Trending) {
 
   return (
     <motion.div
-      onClick={() => navigate(props.coinId)}
+      onClick={() => navigate(`/cryptocurrencies/${props.coinId}`)}
       whileHover={{ y: -5 }}
       className={classes.container}
     >
