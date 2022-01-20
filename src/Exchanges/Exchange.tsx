@@ -3,7 +3,6 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import classes from "./Exchange.module.scss";
 import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LinearProgress, {
   linearProgressClasses,
@@ -38,8 +37,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 function Exchange(props: Exchanges) {
-
-  let navigate = useNavigate();
   
   const [btcPrice, setBtcPrice] = useState<number | null>(null);
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import logo from "../assets/spider-coin.webp";
 import classes from "./Header.module.scss";
 import axios from "axios";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { Link } from "react-router-dom";
 import HeaderSearch from "./HeaderSearch";
 
@@ -87,11 +86,8 @@ function Header() {
             )}%`}</span>
           </h6>
         </div>
-        <div>
-          <DarkModeIcon />
-        </div>
+        <div></div>
       </div>
-      <span className={classes.border}></span>
       <div className={classes["big-container"]}>
         <div>
           <div className={classes["smaller-container"]}>

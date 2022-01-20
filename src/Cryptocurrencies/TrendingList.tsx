@@ -3,7 +3,8 @@ import classes from "./TrendingList.module.scss";
 import axios from "axios";
 import { motion } from "framer-motion";
 import TrendingCoin from "./TrendingCoin";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import { truncate } from "fs";
 interface Trending {
   coins: [
     {
@@ -21,15 +22,19 @@ interface Trending {
 
 function TrendingList() {
   const [trending, setTrending] = useState<Trending | null>(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     let source = axios.CancelToken.source();
     axios
       .get("https://api.coingecko.com/api/v3/search/trending", {
         cancelToken: source.token,
         timeout: 5000,
       })
-      .then((response) => setTrending(response.data))
+      .then((response) => {
+        setTrending(response.data);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
     return () => {
       setTrending(null);
@@ -73,7 +78,11 @@ function TrendingList() {
   return (
     <div className={classes.container}>
       <h2 className={classes.title}>Todays tredning coins</h2>
-      <motion.div className={classes.slider}>{trendingList}</motion.div>
+      {loading === true ? (
+        <CircularProgress />
+      ) : (
+        <motion.div className={classes.slider}>{trendingList}</motion.div>
+      )}
     </div>
   );
 }

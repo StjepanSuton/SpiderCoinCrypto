@@ -9,13 +9,13 @@
   margin-bottom: $padding-value;
 }
 .small-container {
+  height: 30px;
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: solid 0.2px #58667e16;
+  justify-content: flex-start;
   @include container;
 
   h6 {

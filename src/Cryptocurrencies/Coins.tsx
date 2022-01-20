@@ -38,7 +38,7 @@ function Coins(props: Coin) {
 
   const onAddCoin = useCallback(() => {
     dispatch(addCoinToWatchList(props.id));
-  }, [dispatch]);
+  }, [props.id]);
 
   return (
     <TableRow className={classes.row} key={props.market_cap_rank}>

@@ -3,12 +3,13 @@ import axios from "axios";
 import classes from "./Top100.module.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import CircularProgress from "@mui/material/CircularProgress";
 import Coins from "./Coins";
 import TodayCap from "./TodayCap";
 import TrendingList from "./TrendingList";
@@ -33,7 +34,9 @@ interface Coin {
 function Top100() {
   const [top100, setTop100] = useState([]);
   const [clicked, setClicked] = useState(0);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     let source = axios.CancelToken.source();
     axios
       .get(
@@ -43,7 +46,10 @@ function Top100() {
           timeout: 5000,
         }
       )
-      .then((response) => setTop100(response.data))
+      .then((response) => {
+        setTop100(response.data);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
 
     return () => {
@@ -51,7 +57,7 @@ function Top100() {
       source.cancel("Canceling in cleanup");
     };
   }, []);
-
+  console.log(loading);
   useMemo(() => {
     const sorted = top100;
     switch (clicked) {
@@ -92,10 +98,10 @@ function Top100() {
     }
   }, [top100, clicked]);
 
-  const coinList = top100.map((coin: Coin) => (
+  const coinList = top100.map((coin: Coin, i) => (
     <Coins
       id={coin.id}
-      key={coin.market_cap_rank}
+      key={coin.id + i}
       image={coin.image}
       symbol={coin.symbol}
       name={coin.name}
@@ -114,90 +120,94 @@ function Top100() {
       <div className={classes.container}>
         <TrendingList />
         <TodayCap />
-        <TableContainer style={{ overflow: "visible" }}>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">
-                  <BookmarkBorderOutlinedIcon />
-                </TableCell>
-                <TableCell align="center">
-                  <h4
-                    onClick={() => setClicked(clicked === 0 ? 1 : 0)}
-                    className={classes.header}
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    {clicked === 1 ? (
-                      <ArrowDropUpIcon />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    )}
-                    #
-                  </h4>
-                </TableCell>
-                <TableCell align="left">
-                  <h4 className={classes["header-noclick"]}>Coin</h4>
-                </TableCell>
-                <TableCell align="right">
-                  <h4 className={classes["header-noclick"]}>Ticker</h4>
-                </TableCell>
-                <TableCell align="right">
-                  <h4
-                    onClick={() => setClicked(clicked === 2 ? 3 : 2)}
-                    className={classes.header}
-                  >
-                    {clicked === 3 ? (
-                      <ArrowDropUpIcon />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    )}
-                    Price
-                  </h4>
-                </TableCell>
-                <TableCell align="right">
-                  <h4
-                    onClick={() => setClicked(clicked === 4 ? 5 : 4)}
-                    className={classes.header}
-                  >
-                    {clicked === 5 ? (
-                      <ArrowDropUpIcon />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    )}
-                    24h%
-                  </h4>
-                </TableCell>
-                <TableCell align="right">
-                  <h4
-                    onClick={() => setClicked(clicked === 0 ? 1 : 0)}
-                    className={classes.header}
-                  >
-                    {clicked === 1 ? (
-                      <ArrowDropUpIcon />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    )}
-                    Market Cap
-                  </h4>
-                </TableCell>
-                <TableCell align="center">
-                  <h4 className={classes["header-noclick"]}>
-                    Circulating Supply
-                  </h4>
-                </TableCell>
-                <TableCell align="center">
-                  <h4 className={classes["header-noclick"]}>7 days</h4>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{coinList}</TableBody>
-          </Table>
-        </TableContainer>
+        {loading === true ? (
+          <CircularProgress />
+        ) : (
+          <TableContainer style={{ overflow: "visible" }}>
+            <Table stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">
+                    <BookmarkBorderOutlinedIcon />
+                  </TableCell>
+                  <TableCell align="center">
+                    <h4
+                      onClick={() => setClicked(clicked === 0 ? 1 : 0)}
+                      className={classes.header}
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      {clicked === 1 ? (
+                        <ArrowDropUpIcon />
+                      ) : (
+                        <ArrowDropDownIcon />
+                      )}
+                      #
+                    </h4>
+                  </TableCell>
+                  <TableCell align="left">
+                    <h4 className={classes["header-noclick"]}>Coin</h4>
+                  </TableCell>
+                  <TableCell align="right">
+                    <h4 className={classes["header-noclick"]}>Ticker</h4>
+                  </TableCell>
+                  <TableCell align="right">
+                    <h4
+                      onClick={() => setClicked(clicked === 2 ? 3 : 2)}
+                      className={classes.header}
+                    >
+                      {clicked === 3 ? (
+                        <ArrowDropUpIcon />
+                      ) : (
+                        <ArrowDropDownIcon />
+                      )}
+                      Price
+                    </h4>
+                  </TableCell>
+                  <TableCell align="right">
+                    <h4
+                      onClick={() => setClicked(clicked === 4 ? 5 : 4)}
+                      className={classes.header}
+                    >
+                      {clicked === 5 ? (
+                        <ArrowDropUpIcon />
+                      ) : (
+                        <ArrowDropDownIcon />
+                      )}
+                      24h%
+                    </h4>
+                  </TableCell>
+                  <TableCell align="right">
+                    <h4
+                      onClick={() => setClicked(clicked === 0 ? 1 : 0)}
+                      className={classes.header}
+                    >
+                      {clicked === 1 ? (
+                        <ArrowDropUpIcon />
+                      ) : (
+                        <ArrowDropDownIcon />
+                      )}
+                      Market Cap
+                    </h4>
+                  </TableCell>
+                  <TableCell align="center">
+                    <h4 className={classes["header-noclick"]}>
+                      Circulating Supply
+                    </h4>
+                  </TableCell>
+                  <TableCell align="center">
+                    <h4 className={classes["header-noclick"]}>7 days</h4>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{coinList}</TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </div>
     </div>
   );

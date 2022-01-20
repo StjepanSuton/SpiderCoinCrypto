@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import classes from "./ExchangesList.module.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import Exchange from "./Exchange";
 
@@ -24,15 +25,19 @@ interface ExchangeData {
 
 function ExchangesList() {
   const [exchangeData, setExchangeData] = useState<ExchangeData[] | null>(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     let source = axios.CancelToken.source();
     axios
       .get("https://api.coingecko.com/api/v3/exchanges?per_page=100", {
         cancelToken: source.token,
         timeout: 5000,
       })
-      .then((response) => setExchangeData(response.data))
+      .then((response) => {
+        setExchangeData(response.data);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
     return () => {
       setExchangeData(null);
@@ -74,33 +79,39 @@ function ExchangesList() {
         </a>{" "}
         to learn more about trust score
       </h6>
-      <TableContainer style={{ overflow: "visible" }}>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">
-                <h4>#</h4>
-              </TableCell>
-              <TableCell align="left">
-                <h4>Name</h4>
-              </TableCell>
-              <TableCell align="center">
-                <h4>Trust Score</h4>
-              </TableCell>
-              <TableCell align="right">
-                <h4>Trade Volume btc</h4>
-              </TableCell>
-              <TableCell align="right">
-                <h4>Trade Volume Normalized</h4>
-              </TableCell>
-              <TableCell align="right">
-                <h4>Year Established</h4>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{exchangeList}</TableBody>
-        </Table>
-      </TableContainer>
+      {loading === true ? (
+        <CircularProgress
+          style={{ position: "absolute", top: "50%", left: "50%" }}
+        />
+      ) : (
+        <TableContainer style={{ overflow: "visible" }}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">
+                  <h4>#</h4>
+                </TableCell>
+                <TableCell align="left">
+                  <h4>Name</h4>
+                </TableCell>
+                <TableCell align="center">
+                  <h4>Trust Score</h4>
+                </TableCell>
+                <TableCell align="right">
+                  <h4>Trade Volume btc</h4>
+                </TableCell>
+                <TableCell align="right">
+                  <h4>Trade Volume Normalized</h4>
+                </TableCell>
+                <TableCell align="right">
+                  <h4>Year Established</h4>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{exchangeList}</TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </div>
   );
 }
