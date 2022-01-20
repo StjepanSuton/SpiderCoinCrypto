@@ -132,7 +132,6 @@ function WatchList() {
 
   return (
     <div className={classes.container}>
-      <TrendingList />
       <TableContainer style={{ overflow: "visible" }}>
         <Table stickyHeader>
           <TableHead>
@@ -197,8 +196,16 @@ function WatchList() {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{coinListing}</TableBody>
+          <TableBody>{getCoins.length > 0 ? coinListing : ""}</TableBody>
         </Table>
+        {getCoins.length <= 0 ? (
+          <h1 className={classes.nocoins}>
+            <BookmarkBorderOutlinedIcon style={{ fontSize: 40 }} /> Looks like
+            your watchlist is empty add some coins to your watchlist first
+          </h1>
+        ) : (
+          ""
+        )}
       </TableContainer>
     </div>
   );

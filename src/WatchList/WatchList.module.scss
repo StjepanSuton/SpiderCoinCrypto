@@ -10,7 +10,19 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   @include container;
 }
-
+.nocoins {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: $padding-value;
+  margin-bottom: $padding-value;
+  text-align: center;
+  padding: $padding-value;
+  font-family: $primary-font;
+  font-size: h1;
+}
 .header {
   display: flex;
   flex-direction: row;

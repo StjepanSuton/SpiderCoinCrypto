@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import PortfolioData from "./PortfolioData";
 import HelpIcon from "@mui/icons-material/Help";
-import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 interface SearchedCoin {
   id: string;
@@ -103,7 +103,7 @@ function Portfolio(props: {
   //Get data for searched Coin
   useEffect(() => {
     let source = axios.CancelToken.source();
-    if (inputValue.length < 4 || inputValue.length > 15) {
+    if (inputValue.length < 4 || inputValue.length > 35) {
       return;
     } else {
       setLoading(true);
@@ -275,7 +275,13 @@ function Portfolio(props: {
                     Due to the limitations of the API the "Coin id" must be
                     typed in correctly. For the list of supported ids visit the
                     link:
-                    <a href="www.somwhere.com">This Link</a>
+                    <Link
+                      to={"/allcoinslist"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      AllCoinsList
+                    </Link>
                   </p>
                 </Popover>
               </div>

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import ExchangesList from "./Exchanges/ExchangesList";
 import IntroPage from "./Portfolio/IntroPage";
 import WatchList from "./WatchList/WatchList";
+import AllCoinsList from "./AllCoinsList/AllCoinsList";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path={"/exchanges/"} element={<ExchangesList />} />
         <Route path={`/portfolio`} element={<IntroPage />} />
         <Route path={`/watchlist`} element={<WatchList />} />
+        <Route path={`/allcoinslist`} element={<AllCoinsList />} />
       </Routes>
     </div>
   );
