@@ -275,13 +275,7 @@ function Portfolio(props: {
                     Due to the limitations of the API the "Coin id" must be
                     typed in correctly. For the list of supported ids visit the
                     link:
-                    <Link
-                      to={"/allcoinslist"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      AllCoinsList
-                    </Link>
+                    <Link to={"/allcoinslist"}>AllCoinsList</Link>
                   </p>
                 </Popover>
               </div>
