@@ -4,7 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import TrendingCoin from "./TrendingCoin";
 import CircularProgress from "@mui/material/CircularProgress";
-import { truncate } from "fs";
+import useMediaQuery from "@mui/material/useMediaQuery";
 interface Trending {
   coins: [
     {
@@ -21,6 +21,8 @@ interface Trending {
 }
 
 function TrendingList() {
+  const phone = useMediaQuery("(max-width:550px)");
+
   const [trending, setTrending] = useState<Trending | null>(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -62,18 +64,34 @@ function TrendingList() {
     };
   }, []);
 
-  const trendingList = trending?.coins.map((coin, i) => (
-    <TrendingCoin
-      key={coin.item.id}
-      coinId={coin.item.id}
-      image={coin.item.small}
-      market_cap_rank={coin.item.market_cap_rank}
-      name={coin.item.name}
-      price_btc={coin.item.price_btc}
-      ticker={coin.item.symbol}
-      btc_price={btcPrice}
-    />
-  ));
+  const trendingList =
+    phone === true
+      ? trending?.coins
+          .slice(0, 3)
+          .map((coin, i) => (
+            <TrendingCoin
+              key={coin.item.id}
+              coinId={coin.item.id}
+              image={coin.item.small}
+              market_cap_rank={coin.item.market_cap_rank}
+              name={coin.item.name}
+              price_btc={coin.item.price_btc}
+              ticker={coin.item.symbol}
+              btc_price={btcPrice}
+            />
+          ))
+      : trending?.coins.map((coin, i) => (
+          <TrendingCoin
+            key={coin.item.id}
+            coinId={coin.item.id}
+            image={coin.item.small}
+            market_cap_rank={coin.item.market_cap_rank}
+            name={coin.item.name}
+            price_btc={coin.item.price_btc}
+            ticker={coin.item.symbol}
+            btc_price={btcPrice}
+          />
+        ));
 
   return (
     <div className={classes.container}>

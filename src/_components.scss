@@ -10,6 +10,9 @@
   @include media("<=tablet") {
     max-width: 1024px;
   }
+  @include media("<=phone") {
+    max-width: 450px;
+  }
 }
 @mixin button {
   background-color: rgba(59, 131, 246, 0.188);

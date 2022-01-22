@@ -1,6 +1,7 @@
 import classes from "./TrendingCoin.module.scss";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+
 interface Trending {
   coinId: string;
   image: string;
@@ -13,6 +14,7 @@ interface Trending {
 
 function TrendingCoin(props: Trending) {
   const navigate = useNavigate();
+
 
   return (
     <motion.div

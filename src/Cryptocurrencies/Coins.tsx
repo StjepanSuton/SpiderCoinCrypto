@@ -30,7 +30,7 @@ interface Coin {
 
 function Coins(props: Coin) {
   const tablet = useMediaQuery("(max-width:1024px)");
-  const phone = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:550px)");
 
   const showBookmark = useSelector((state: RootState) => state.coins);
   const dispatch = useDispatch();
@@ -48,15 +48,25 @@ function Coins(props: Coin) {
     <TableRow className={classes.row} key={props.market_cap_rank}>
       <TableCell align="center">
         {showBookmark.find((item) => item === props.id) ? (
-          <BookmarkIcon onClick={onAddCoin} />
+          <BookmarkIcon
+            style={{ fontSize: phone === true ? 15 : 25 }}
+            onClick={onAddCoin}
+          />
         ) : (
-          <BookmarkBorderOutlinedIcon onClick={onAddCoin} />
+          <BookmarkBorderOutlinedIcon
+            style={{ fontSize: phone === true ? 15 : 25 }}
+            onClick={onAddCoin}
+          />
         )}
       </TableCell>
-      <TableCell align="center">
-        {" "}
-        <span className={classes.symbol}>{props.market_cap_rank}</span>
-      </TableCell>
+      {phone === true ? (
+        ""
+      ) : (
+        <TableCell align="center">
+          {" "}
+          <span className={classes.symbol}>{props.market_cap_rank}</span>
+        </TableCell>
+      )}
       <TableCell onClick={getLink} align="left">
         <div className={classes["coin-container"]}>
           <img className={classes.image} src={props.image} alt={props.image} />
