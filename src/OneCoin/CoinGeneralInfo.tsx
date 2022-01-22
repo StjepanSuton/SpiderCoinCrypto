@@ -50,7 +50,7 @@ function CoinGeneralInfo(props: GeneralInfo) {
     dispatch(addCoinToWatchList(props.id));
   }, [dispatch]);
   return (
-    <div>
+    <div className={classes.container}>
       <h4 className={classes.rank}>{`Rank: #${props.rank}`}</h4>
       <div className={classes["first-box"]}>
         <img className={classes.image} src={props.image} />

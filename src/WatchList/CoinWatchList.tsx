@@ -11,6 +11,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useSelector, useDispatch } from "react-redux";
 import { addCoinToWatchList, RootState } from "../store/WatchListStore";
+import useMediaQuery from "@mui/material/useMediaQuery";
 interface Coin {
   id: string;
   image: string;
@@ -28,6 +29,9 @@ interface Coin {
 }
 
 function CoinsWatchlist(props: Coin) {
+  const tablet = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:1024px)");
+
   const showBookmark = useSelector((state: RootState) => state.coins);
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -59,14 +63,18 @@ function CoinsWatchlist(props: Coin) {
           {props.name}
         </div>
       </TableCell>
-      <TableCell align="right">
-        <Link
-          to={`/cryptocurrencies/${props.symbol}`}
-          className={classes.symbol}
-        >
-          <span>{props.symbol}</span>
-        </Link>
-      </TableCell>
+      {tablet === true ? (
+        ""
+      ) : (
+        <TableCell align="right">
+          <Link
+            to={`/cryptocurrencies/${props.symbol}`}
+            className={classes.symbol}
+          >
+            <span>{props.symbol}</span>
+          </Link>
+        </TableCell>
+      )}
       <TableCell align="right">
         <span className={classes.numbers}>
           {`$ ${props.current_price.toLocaleString("en-IN", {
@@ -100,74 +108,82 @@ function CoinsWatchlist(props: Coin) {
           "en-IN"
         )}`}</span>
       </TableCell>
-      <TableCell style={{ padding: 0 }} size="small" align="center">
-        <Doughnut
-          style={{
-            maxWidth: 150,
-            maxHeight: 50,
-            marginTop: 5,
-            display: "unset",
-          }}
-          options={doughnutOptions}
-          data={{
-            labels: [
-              "Circ",
-              props.total_supply - props.circulating_supply <= 0
-                ? []
-                : "Supply",
-            ],
-            datasets: [
-              {
-                label: "",
-                data: [
-                  props.circulating_supply,
-                  props.total_supply - props.circulating_supply <= 0
-                    ? []
-                    : props.total_supply - props.circulating_supply,
-                ],
-                backgroundColor: [
-                  "rgba(255, 99, 133, 0.359)",
-                  "rgba(54, 163, 235, 0.441)",
-                ],
-                borderColor: [
-                  "rgba(255, 99, 133, 0.359)",
-                  "rgba(54, 163, 235, 0.441)",
-                ],
-              },
-            ],
-          }}
-        />
-      </TableCell>
-      <TableCell style={{ padding: 0 }} size="small" align="center">
-        <Line
-          style={{
-            maxWidth: 150,
-            maxHeight: 50,
-            display: "unset",
-          }}
-          options={lineOptions}
-          data={{
-            labels: props.sparkline_in_7d.price.map((_, i) => {
-              return i;
-            }),
-            datasets: [
-              {
-                label: "",
-                data: props.sparkline_in_7d.price.map((price) => {
-                  return price;
-                }),
-                borderColor:
-                  props.sparkline_in_7d.price[0] >
-                  props.sparkline_in_7d.price[
-                    props.sparkline_in_7d.price.length - 1
-                  ]
-                    ? "#ea3943"
-                    : "rgb(46, 150, 1)",
-              },
-            ],
-          }}
-        />
-      </TableCell>
+      {tablet === true ? (
+        ""
+      ) : (
+        <TableCell style={{ padding: 0 }} size="small" align="center">
+          <Doughnut
+            style={{
+              maxWidth: 150,
+              maxHeight: 50,
+              marginTop: 5,
+              display: "unset",
+            }}
+            options={doughnutOptions}
+            data={{
+              labels: [
+                "Circ",
+                props.total_supply - props.circulating_supply <= 0
+                  ? []
+                  : "Supply",
+              ],
+              datasets: [
+                {
+                  label: "",
+                  data: [
+                    props.circulating_supply,
+                    props.total_supply - props.circulating_supply <= 0
+                      ? []
+                      : props.total_supply - props.circulating_supply,
+                  ],
+                  backgroundColor: [
+                    "rgba(255, 99, 133, 0.359)",
+                    "rgba(54, 163, 235, 0.441)",
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 133, 0.359)",
+                    "rgba(54, 163, 235, 0.441)",
+                  ],
+                },
+              ],
+            }}
+          />
+        </TableCell>
+      )}
+      {tablet === true ? (
+        ""
+      ) : (
+        <TableCell style={{ padding: 0 }} size="small" align="center">
+          <Line
+            style={{
+              maxWidth: 150,
+              maxHeight: 50,
+              display: "unset",
+            }}
+            options={lineOptions}
+            data={{
+              labels: props.sparkline_in_7d.price.map((_, i) => {
+                return i;
+              }),
+              datasets: [
+                {
+                  label: "",
+                  data: props.sparkline_in_7d.price.map((price) => {
+                    return price;
+                  }),
+                  borderColor:
+                    props.sparkline_in_7d.price[0] >
+                    props.sparkline_in_7d.price[
+                      props.sparkline_in_7d.price.length - 1
+                    ]
+                      ? "#ea3943"
+                      : "rgb(46, 150, 1)",
+                },
+              ],
+            }}
+          />
+        </TableCell>
+      )}
     </TableRow>
   );
 }

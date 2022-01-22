@@ -4,7 +4,10 @@ import classes from "./Header.module.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import HeaderSearch from "./HeaderSearch";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { motion } from "framer-motion";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 interface Mdata {
   data: {
     active_cryptocurrencies: number;
@@ -23,6 +26,20 @@ interface Mdata {
 }
 
 function Header() {
+  //mobile menu
+  const tablet = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:1024px)");
+  const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {
+    if (tablet === false) {
+      setShowMenu(true);
+    } else {
+      setShowMenu(false);
+    }
+  }, [tablet]);
+
+  ///
   const [marketdata, setMarketData] = useState<Mdata | null>(null);
   const [exchanges, setExchanges] = useState<number | null>(null);
   useEffect(() => {
@@ -90,23 +107,62 @@ function Header() {
       </div>
       <div className={classes["big-container"]}>
         <div>
-          <div className={classes["smaller-container"]}>
-            <Link className={classes.link} to="/home">
-              <img className={classes.image} src={logo} alt="spidercoinn" />
-            </Link>
-            <Link className={classes.link} to="/cryptocurrencies">
-              <h3>Cryptocurrencies</h3>
-            </Link>
-            <Link className={classes.link} to="/exchanges">
-              <h3>Exchanges</h3>
-            </Link>
-            <Link className={classes.link} to="/portfolio">
-              <h3>Portfolio</h3>
-            </Link>
-            <Link className={classes.link} to="/watchlist">
-              <h3>WatchList</h3>
-            </Link>
-          </div>
+          {tablet === true ? (
+            <MenuIcon onClick={() => setShowMenu(!showMenu)} />
+          ) : (
+            ""
+          )}
+          {showMenu && (
+            <motion.div className={classes["smaller-container"]}>
+              {tablet === true ? (
+                <CloseIcon
+                  className={classes.close}
+                  onClick={() => setShowMenu(!showMenu)}
+                />
+              ) : (
+                ""
+              )}
+              {tablet === true ? (
+                ""
+              ) : (
+                <Link
+                  onClick={() => setShowMenu(!showMenu)}
+                  className={classes.link}
+                  to="/cryptocurrencies"
+                >
+                  <img className={classes.image} src={logo} alt="spidercoinn" />
+                </Link>
+              )}
+              <Link
+                onClick={() => setShowMenu(!showMenu)}
+                className={classes.link}
+                to="/cryptocurrencies"
+              >
+                <h3>Cryptocurrencies</h3>
+              </Link>
+              <Link
+                onClick={() => setShowMenu(!showMenu)}
+                className={classes.link}
+                to="/exchanges"
+              >
+                <h3>Exchanges</h3>
+              </Link>
+              <Link
+                onClick={() => setShowMenu(!showMenu)}
+                className={classes.link}
+                to="/portfolio"
+              >
+                <h3>Portfolio</h3>
+              </Link>
+              <Link
+                onClick={() => setShowMenu(!showMenu)}
+                className={classes.link}
+                to="/watchlist"
+              >
+                <h3>WatchList</h3>
+              </Link>
+            </motion.div>
+          )}
         </div>
         <div>
           <HeaderSearch />

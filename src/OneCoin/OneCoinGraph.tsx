@@ -151,7 +151,7 @@ function OneCoinGraph() {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <div className={classes.buttonbox}>
         <div>
           <button
@@ -201,7 +201,7 @@ function OneCoinGraph() {
         </div>
       </div>
       <div ref={c}>
-        <Line options={options} data={data} />;
+        <Line options={options} data={data} />
       </div>
     </div>
   );

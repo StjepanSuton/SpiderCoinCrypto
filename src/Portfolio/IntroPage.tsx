@@ -10,7 +10,7 @@ function IntroPage() {
   const [refresh, doRefresh] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
 
-  const introHandler = (event:boolean) => {
+  const introHandler = (event: boolean) => {
     setShowIntro(event);
   };
 
@@ -29,7 +29,7 @@ function IntroPage() {
         to use platform.`}
               </h4>
             </div>
-            <div>
+            <div className={classes["button-container"]}>
               <button
                 onClick={() => doRefresh((prev) => prev + 1)}
                 className={classes.button}
@@ -70,7 +70,11 @@ function IntroPage() {
           </div>
         </div>
       )}
-      <Portfolio showIntro={showIntro} introHandler={introHandler} refresh={refresh} />
+      <Portfolio
+        showIntro={showIntro}
+        introHandler={introHandler}
+        refresh={refresh}
+      />
     </div>
   );
 }

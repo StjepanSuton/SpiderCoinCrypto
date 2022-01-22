@@ -1,4 +1,9 @@
 @import "../variables";
+@import "../brakepoints";
+@import "../components";
+.main-container {
+  @include container;
+}
 .container {
   display: grid 1fr;
 }
@@ -6,6 +11,9 @@
   font-family: $primary-font;
   font-size: $h2;
   margin-bottom: $padding-value;
+  @include media("<=tablet") {
+    font-size: $h2-tablet;
+  }
 }
 .small-box {
   display: flex;
@@ -18,6 +26,9 @@
   font-family: $primary-font;
   color: $secondary-color;
   font-size: $h4;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }
 .values {
   display: flex;
@@ -25,6 +36,9 @@
   align-items: center;
   font-family: $primary-font;
   font-size: $h4;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }
 .links {
   display: flex;
@@ -40,5 +54,8 @@
   cursor: pointer;
   &:hover {
     background-color: cornflowerblue;
+  }
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
   }
 }

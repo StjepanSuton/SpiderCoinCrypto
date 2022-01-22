@@ -7,6 +7,7 @@ import axios from "axios";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import useMediaQuery from "@mui/material/useMediaQuery";
 interface Exchanges {
   id: string;
   name: string;
@@ -37,7 +38,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 function Exchange(props: Exchanges) {
-  
+  const tablet = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:1024px)");
+
   const [btcPrice, setBtcPrice] = useState<number | null>(null);
 
   useEffect(() => {

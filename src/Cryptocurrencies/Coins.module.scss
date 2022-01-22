@@ -1,15 +1,23 @@
 @import "../variables";
 @import "../components";
+@import "../brakepoints";
 .coin-container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   font-weight: bold;
   font-family: $primary-font;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .image {
   width: 25px;
   margin-right: $padding-value;
+  @include media("<=tablet") {
+    width: 20px;
+    font-size: $h3-tablet;
+  }
 }
 .row {
   cursor: pointer;
@@ -22,11 +30,17 @@
   color: $secondary-color;
   font-weight: 500;
   text-decoration: none;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .numbers {
   font-family: $primary-font;
   color: $primary-color;
   font-weight: 600;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .percentage-positive {
   display: flex;
@@ -36,6 +50,9 @@
   font-family: $primary-font;
   color: $positive-color;
   font-weight: 600;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .percentage-negative {
   display: flex;
@@ -45,4 +62,7 @@
   font-family: $primary-font;
   color: $negative-color;
   font-weight: 600;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }

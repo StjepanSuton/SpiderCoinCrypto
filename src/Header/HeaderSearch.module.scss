@@ -1,9 +1,10 @@
 @import "../variables";
+@import "../brakepoints";
 .container {
   position: relative;
   z-index: 3;
   height: 33px;
-
+  z-index: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +30,7 @@
   padding: calc($padding-value/2);
   z-index: 3;
   width: 100%;
-
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,6 +61,7 @@
 
 .helper {
   position: absolute;
+
   right: 10px;
   top: 4px;
   button {

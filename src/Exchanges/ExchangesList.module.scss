@@ -1,6 +1,6 @@
 @import "../variables";
 @import "../components";
-
+@import "../brakepoints";
 .container {
   @include container;
   margin-top: $padding-value;
@@ -11,6 +11,9 @@
   font-family: $primary-font;
   font-size: $h2;
   margin-bottom: $padding-value;
+  @include media("<=tablet") {
+    font-size: $h2-tablet;
+  }
 }
 .subtitle {
   width: 70%;
@@ -26,5 +29,13 @@
     &:hover {
       color: rgb(59, 131, 246);
     }
+  }
+  @include media("<=tablet") {
+    font-size: $h6-tablet;
+  }
+}
+.table {
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
   }
 }

@@ -1,5 +1,6 @@
 @import "../variables";
 @import "../components";
+@import "../brakepoints";
 .container {
   position: relative;
   display: flex;
@@ -7,6 +8,9 @@
   align-items: flex-start;
   justify-content: unset;
   margin-bottom: $padding-value;
+  @include media("<=tablet") {
+    flex-direction: column-reverse;
+  }
 }
 .small-container {
   height: 30px;
@@ -17,16 +21,24 @@
   align-items: center;
   justify-content: flex-start;
   @include container;
-
+  @include media("<=tablet") {
+    justify-content: center;
+  }
   h6 {
     font-size: $h6;
     font-family: $primary-font;
     color: $secondary-color;
     padding-right: $padding-value;
+    @include media("<=tablet") {
+      font-size: $h6-tablet;
+    }
   }
   span {
     color: rgba(59, 131, 246, 0.735);
     font-size: $p;
+    @include media("<=tablet") {
+      font-size: $p-tablet;
+    }
   }
   .smaller-container {
     display: flex;
@@ -36,16 +48,35 @@
 .big-container {
   position: relative;
   z-index: 1;
-  height: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   @include container;
+  @include media("<=tablet") {
+    height: 50px;
+  }
   .smaller-container {
     display: flex;
+    z-index: 1;
     flex-direction: row;
     align-items: center;
+    @include media("<=tablet") {
+      background-color: rgb(255, 255, 255);
+      left: 0px;
+      top: 0px;
+      min-height: 350px;
+      min-width: 100vw;
+      padding: $padding-value;
+      position: absolute;
+      height: unset;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .close {
+      margin-left: $padding-value;
+    }
   }
 }
 .link {
@@ -56,6 +87,13 @@
   padding-right: $padding-value;
   &:hover {
     color: rgba(59, 131, 246, 0.735);
+  }
+  @include media("<=tablet") {
+    margin-left: $padding-value;
+    width: 95%;
+    font-size: $h3-tablet;
+    padding: calc($padding-value/2);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.235);
   }
 }
 .image {

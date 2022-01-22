@@ -22,6 +22,9 @@
   padding: $padding-value;
   font-family: $primary-font;
   font-size: h1;
+  @include media("<=tablet") {
+    font-size: $h1-tablet;
+  }
 }
 .header {
   display: flex;
@@ -33,9 +36,15 @@
   font-weight: 600;
   cursor: pointer;
   margin: 0;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }
 .header-noclick {
   font-size: $h4;
   font-weight: 600;
   margin: 0;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }

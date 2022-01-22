@@ -15,6 +15,9 @@
   font-size: $h2;
   font-weight: 700;
   padding: 0.25rem;
+  @include media("<=tablet") {
+    font-size: $h2-tablet;
+  }
 }
 .subheader {
   font-family: $primary-font;
@@ -22,6 +25,9 @@
   color: #58667e;
   font-weight: 500;
   padding: 0.25rem;
+  @include media("<=tablet") {
+    font-size: $h2-tablet;
+  }
 }
 .percentage-positive {
   font-family: $primary-font;

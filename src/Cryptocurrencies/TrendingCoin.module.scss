@@ -1,4 +1,5 @@
 @import "../variables";
+@import "../brakepoints";
 .container {
   display: grid;
   grid-template-columns: 1.2fr 2fr;
@@ -8,17 +9,31 @@
   width: 170px;
   height: 150px;
   cursor: pointer;
+  @include media("<=tablet") {
+    width: 130px;
+    height: 100px;
+    margin-left: $padding-value;
+  }
 }
 .image {
   width: 40px;
+  @include media("<=tablet") {
+    width: 25px;
+  }
 }
 .info {
   font-size: $h4;
   font-family: $primary-font;
   color: $secondary-color;
   font-weight: 500;
+  @include media("<=tablet") {
+    font-size: $h6-tablet;
+  }
 }
 .value {
   font-size: $h4;
   font-family: $primary-font;
+  @include media("<=tablet") {
+    font-size: $h6-tablet;
+  }
 }

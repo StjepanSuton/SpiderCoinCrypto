@@ -85,25 +85,28 @@ function ExchangesList() {
         />
       ) : (
         <TableContainer style={{ overflow: "visible" }}>
-          <Table stickyHeader>
+          <Table
+            stickyHeader
+            style={{ overflow: "visible", position: "relative", zIndex: 0 }}
+          >
             <TableHead>
               <TableRow>
-                <TableCell align="center">
+                <TableCell className={classes.table} align="center">
                   <h4>#</h4>
                 </TableCell>
-                <TableCell align="left">
+                <TableCell className={classes.table} align="left">
                   <h4>Name</h4>
                 </TableCell>
-                <TableCell align="center">
+                <TableCell className={classes.table} align="center">
                   <h4>Trust Score</h4>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell className={classes.table} align="right">
                   <h4>Trade Volume btc</h4>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell className={classes.table} align="right">
                   <h4>Trade Volume Normalized</h4>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell className={classes.table} align="right">
                   <h4>Year Established</h4>
                 </TableCell>
               </TableRow>

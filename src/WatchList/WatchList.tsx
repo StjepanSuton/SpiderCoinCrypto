@@ -14,6 +14,7 @@ import axios from "axios";
 import { useState, useEffect, useMemo } from "react";
 import CoinWatchList from "./CoinWatchList";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface CoinData {
   id: string;
@@ -40,6 +41,9 @@ interface CoinData {
 }
 
 function WatchList() {
+  const tablet = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:1024px)");
+
   const CoinsList = useSelector((state: RootState) => state.coins);
   const [getCoins, setGetCoins] = useState<CoinData[]>([]);
   const [clicked, setClicked] = useState(0);
@@ -133,7 +137,10 @@ function WatchList() {
   return (
     <div className={classes.container}>
       <TableContainer style={{ overflow: "visible" }}>
-        <Table stickyHeader>
+        <Table
+          stickyHeader
+          style={{ overflow: "visible", position: "relative", zIndex: 0 }}
+        >
           <TableHead>
             <TableRow>
               <TableCell align="center">
@@ -150,21 +157,42 @@ function WatchList() {
                     justifyContent: "flex-start",
                   }}
                 >
-                  {clicked === 1 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}#
+                  {clicked === 1 ? (
+                    <ArrowDropUpIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  ) : (
+                    <ArrowDropDownIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  )}
+                  #
                 </h4>
               </TableCell>
               <TableCell align="left">
                 <h4 className={classes["header-noclick"]}>Coin</h4>
               </TableCell>
-              <TableCell align="right">
-                <h4 className={classes["header-noclick"]}>Ticker</h4>
-              </TableCell>
+              {tablet === true ? (
+                ""
+              ) : (
+                <TableCell align="right">
+                  <h4 className={classes["header-noclick"]}>Ticker</h4>
+                </TableCell>
+              )}
               <TableCell align="right">
                 <h4
                   onClick={() => setClicked(clicked === 2 ? 3 : 2)}
                   className={classes.header}
                 >
-                  {clicked === 3 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                  {clicked === 3 ? (
+                    <ArrowDropUpIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  ) : (
+                    <ArrowDropDownIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  )}
                   Price
                 </h4>
               </TableCell>
@@ -173,7 +201,15 @@ function WatchList() {
                   onClick={() => setClicked(clicked === 4 ? 5 : 4)}
                   className={classes.header}
                 >
-                  {clicked === 5 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                  {clicked === 5 ? (
+                    <ArrowDropUpIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  ) : (
+                    <ArrowDropDownIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  )}
                   24h%
                 </h4>
               </TableCell>
@@ -182,18 +218,34 @@ function WatchList() {
                   onClick={() => setClicked(clicked === 0 ? 1 : 0)}
                   className={classes.header}
                 >
-                  {clicked === 1 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                  {clicked === 1 ? (
+                    <ArrowDropUpIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  ) : (
+                    <ArrowDropDownIcon
+                      style={{ fontSize: tablet === true ? 15 : 20 }}
+                    />
+                  )}
                   Market Cap
                 </h4>
               </TableCell>
-              <TableCell align="center">
-                <h4 className={classes["header-noclick"]}>
-                  Circulating Supply
-                </h4>
-              </TableCell>
-              <TableCell align="center">
-                <h4 className={classes["header-noclick"]}>7 days</h4>
-              </TableCell>
+              {tablet === true ? (
+                ""
+              ) : (
+                <TableCell align="center">
+                  <h4 className={classes["header-noclick"]}>
+                    Circulating Supply
+                  </h4>
+                </TableCell>
+              )}
+              {tablet === true ? (
+                ""
+              ) : (
+                <TableCell align="center">
+                  <h4 className={classes["header-noclick"]}>7 days</h4>
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>{getCoins.length > 0 ? coinListing : ""}</TableBody>

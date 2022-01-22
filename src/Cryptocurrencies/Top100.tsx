@@ -14,6 +14,7 @@ import Coins from "./Coins";
 import TodayCap from "./TodayCap";
 import TrendingList from "./TrendingList";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface Coin {
   id: string;
@@ -32,6 +33,9 @@ interface Coin {
 }
 
 function Top100() {
+  const tablet = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:1024px)");
+
   const [top100, setTop100] = useState([]);
   const [clicked, setClicked] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -57,7 +61,6 @@ function Top100() {
       source.cancel("Canceling in cleanup");
     };
   }, []);
-  console.log(loading);
   useMemo(() => {
     const sorted = top100;
     switch (clicked) {
@@ -124,7 +127,10 @@ function Top100() {
           <CircularProgress />
         ) : (
           <TableContainer style={{ overflow: "visible" }}>
-            <Table stickyHeader>
+            <Table
+              stickyHeader
+              style={{ overflow: "visible", position: "relative", zIndex: 0 }}
+            >
               <TableHead>
                 <TableRow>
                   <TableCell align="center">
@@ -142,9 +148,13 @@ function Top100() {
                       }}
                     >
                       {clicked === 1 ? (
-                        <ArrowDropUpIcon />
+                        <ArrowDropUpIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       ) : (
-                        <ArrowDropDownIcon />
+                        <ArrowDropDownIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       )}
                       #
                     </h4>
@@ -152,18 +162,26 @@ function Top100() {
                   <TableCell align="left">
                     <h4 className={classes["header-noclick"]}>Coin</h4>
                   </TableCell>
-                  <TableCell align="right">
-                    <h4 className={classes["header-noclick"]}>Ticker</h4>
-                  </TableCell>
+                  {tablet === true ? (
+                    ""
+                  ) : (
+                    <TableCell align="right">
+                      <h4 className={classes["header-noclick"]}>Ticker</h4>
+                    </TableCell>
+                  )}
                   <TableCell align="right">
                     <h4
                       onClick={() => setClicked(clicked === 2 ? 3 : 2)}
                       className={classes.header}
                     >
                       {clicked === 3 ? (
-                        <ArrowDropUpIcon />
+                        <ArrowDropUpIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       ) : (
-                        <ArrowDropDownIcon />
+                        <ArrowDropDownIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       )}
                       Price
                     </h4>
@@ -174,9 +192,13 @@ function Top100() {
                       className={classes.header}
                     >
                       {clicked === 5 ? (
-                        <ArrowDropUpIcon />
+                        <ArrowDropUpIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       ) : (
-                        <ArrowDropDownIcon />
+                        <ArrowDropDownIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       )}
                       24h%
                     </h4>
@@ -187,21 +209,33 @@ function Top100() {
                       className={classes.header}
                     >
                       {clicked === 1 ? (
-                        <ArrowDropUpIcon />
+                        <ArrowDropUpIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       ) : (
-                        <ArrowDropDownIcon />
+                        <ArrowDropDownIcon
+                          style={{ fontSize: tablet === true ? 15 : 20 }}
+                        />
                       )}
                       Market Cap
                     </h4>
                   </TableCell>
-                  <TableCell align="center">
-                    <h4 className={classes["header-noclick"]}>
-                      Circulating Supply
-                    </h4>
-                  </TableCell>
-                  <TableCell align="center">
-                    <h4 className={classes["header-noclick"]}>7 days</h4>
-                  </TableCell>
+                  {tablet === true ? (
+                    ""
+                  ) : (
+                    <TableCell align="center">
+                      <h4 className={classes["header-noclick"]}>
+                        Circulating Supply
+                      </h4>
+                    </TableCell>
+                  )}
+                  {tablet === true ? (
+                    ""
+                  ) : (
+                    <TableCell align="center">
+                      <h4 className={classes["header-noclick"]}>7 days</h4>
+                    </TableCell>
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody>{coinList}</TableBody>

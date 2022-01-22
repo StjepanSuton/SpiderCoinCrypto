@@ -18,7 +18,7 @@ interface SocialInfo {
 
 function CoinSocialInfo(props: SocialInfo) {
   return (
-    <div>
+    <div className={classes["main-container"]}>
       <h2 className={classes.title}>Info:</h2>
       <div className={classes.container}>
         <div className={classes["small-box"]}>

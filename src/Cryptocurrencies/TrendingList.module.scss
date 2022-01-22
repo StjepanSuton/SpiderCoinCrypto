@@ -1,5 +1,6 @@
 @import "../variables";
 @import "../components";
+@import "../brakepoints";
 .container {
   display: flex;
   flex-direction: column;
@@ -12,6 +13,9 @@
 .title {
   font-size: $h2;
   margin-bottom: $padding-value;
+  @include media("<=tablet") {
+    font-size: $h2-tablet;
+  }
 }
 .slider {
   width: 100%;
@@ -26,4 +30,7 @@
   padding-right: $padding-value;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  @include media("<=tablet") {
+    overflow: scroll;
+  }
 }

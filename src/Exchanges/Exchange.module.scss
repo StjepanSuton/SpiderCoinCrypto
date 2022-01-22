@@ -1,4 +1,5 @@
 @import "../variables";
+@import "../brakepoints";
 .row {
   cursor: pointer;
   &:hover {
@@ -8,28 +9,46 @@
 .rank {
   font-family: $primary-font;
   font-weight: 500;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .name-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .name {
   font-weight: bold;
   font-family: $primary-font;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .image {
   margin: 0;
   width: 25px;
   margin-right: $padding-value;
+  @include media("<=tablet") {
+    width: 20px;
+  }
 }
 .trust-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  @include media("<=tablet") {
+    font-size: $h3-tablet;
+  }
 }
 .numbers {
   font-family: $primary-font;
   color: $primary-color;
   font-weight: 600;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }

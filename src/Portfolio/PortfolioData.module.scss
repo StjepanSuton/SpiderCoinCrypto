@@ -1,5 +1,6 @@
 @import "../variables";
 @import "../components";
+@import "../brakepoints";
 .container {
   @include container;
   width: 100%;
@@ -23,12 +24,18 @@
     font-weight: 500;
     color: $secondary-color;
     margin-bottom: $padding-value;
+    @include media("<=tablet") {
+      font-size: $h4-tablet;
+    }
   }
   h1 {
     margin-bottom: $padding-value;
     font-family: $primary-font;
     font-size: $h1;
     font-weight: bold;
+    @include media("<=tablet") {
+      font-size: $h1-tablet;
+    }
   }
 }
 
@@ -48,6 +55,9 @@
   font-size: 16px;
   cursor: pointer;
   background-color: $positive-color;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }
 .button-clear {
   font-family: $primary-font;
@@ -63,11 +73,19 @@
   font-size: 16px;
   cursor: pointer;
   background-color: $negative-color;
+  @include media("<=tablet") {
+    font-size: $h4-tablet;
+  }
 }
 .graph-container {
   display: grid;
   grid-template-columns: 4.5fr 1fr;
   grid-gap: $padding-value;
+  @include media("<=tablet") {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
 }
 .line {
   width: 100%;
@@ -79,6 +97,9 @@
     font-weight: bold;
     color: $secondary-color;
     margin-bottom: $padding-value;
+    @include media("<=tablet") {
+      font-size: $h4-tablet;
+    }
   }
 }
 .diversity {
@@ -93,6 +114,9 @@
     color: $secondary-color;
     margin-bottom: $padding-value;
     margin-top: $padding-value;
+    @include media("<=tablet") {
+      font-size: $h4-tablet;
+    }
   }
   .graph {
     width: 70%;
@@ -112,12 +136,18 @@
     font-weight: bold;
     color: $secondary-color;
     margin-bottom: $padding-value;
+    @include media("<=tablet") {
+      font-size: $h4-tablet;
+    }
   }
   h6 {
     font-family: $primary-font;
     font-size: $h6;
     font-weight: bold;
     color: $primary-color;
+    @include media("<=tablet") {
+      font-size: $h6-tablet;
+    }
   }
   img {
     width: 25px;
@@ -141,18 +171,27 @@
     color: $secondary-color;
     margin-top: $padding-value;
     margin-bottom: $padding-value;
+    @include media("<=tablet") {
+      font-size: $h4-tablet;
+    }
   }
   h4 {
     font-family: $primary-font;
     font-size: $h4;
     font-weight: bold;
     color: $primary-color;
+    @include media("<=tablet") {
+      font-size: $h4-tablet;
+    }
   }
   h6 {
     font-family: $primary-font;
     font-size: $h6;
     font-weight: bold;
     color: $primary-color;
+    @include media("<=tablet") {
+      font-size: $h6-tablet;
+    }
   }
   img {
     width: 25px;
