@@ -36,6 +36,9 @@
     @include media("<=tablet") {
       font-size: $h1-tablet;
     }
+    @include media("<=phone") {
+      font-size: $h1-phone;
+    }
   }
 }
 
@@ -58,6 +61,10 @@
   @include media("<=tablet") {
     font-size: $h4-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h4-phone;
+    padding: calc($padding-value/2);
+  }
 }
 .button-clear {
   font-family: $primary-font;
@@ -75,6 +82,12 @@
   background-color: $negative-color;
   @include media("<=tablet") {
     font-size: $h4-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h4-phone;
+    padding: calc($padding-value/2);
+    margin-top: calc($padding-value/2);
+    align-self: flex-end;
   }
 }
 .graph-container {

@@ -98,7 +98,7 @@ function Exchange(props: Exchanges) {
       <TableCell align="right">
         <span className={classes.numbers}>
           {btcPrice &&
-            `$ ${(
+            `$${(
               props.trade_volume_24h_btc_normalized * btcPrice
             ).toLocaleString()}`}
         </span>

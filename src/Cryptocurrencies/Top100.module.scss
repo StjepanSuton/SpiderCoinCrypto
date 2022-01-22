@@ -25,6 +25,8 @@
   @include media("<=tablet") {
     font-size: $h4-tablet;
   }
+  @include media("<=phone") {
+  }
 }
 .header-noclick {
   font-size: $h4;
@@ -32,5 +34,7 @@
   margin: 0;
   @include media("<=tablet") {
     font-size: $h4-tablet;
+  }
+  @include media("<=phone") {
   }
 }

@@ -42,7 +42,7 @@ interface CoinData {
 
 function WatchList() {
   const tablet = useMediaQuery("(max-width:1024px)");
-  const phone = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:550px)");
 
   const CoinsList = useSelector((state: RootState) => state.coins);
   const [getCoins, setGetCoins] = useState<CoinData[]>([]);
@@ -136,7 +136,7 @@ function WatchList() {
 
   return (
     <div className={classes.container}>
-      <TableContainer style={{ overflow: "visible" }}>
+      <TableContainer style={{ overflow: "visible", overflowX: "scroll" }}>
         <Table
           stickyHeader
           style={{ overflow: "visible", position: "relative", zIndex: 0 }}
@@ -144,31 +144,37 @@ function WatchList() {
           <TableHead>
             <TableRow>
               <TableCell align="center">
-                <BookmarkBorderOutlinedIcon />
+                <BookmarkBorderOutlinedIcon
+                  style={{ fontSize: phone === true ? 15 : 25 }}
+                />
               </TableCell>
-              <TableCell align="center">
-                <h4
-                  onClick={() => setClicked(clicked === 0 ? 1 : 0)}
-                  className={classes.header}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                  }}
-                >
-                  {clicked === 1 ? (
-                    <ArrowDropUpIcon
-                      style={{ fontSize: tablet === true ? 15 : 20 }}
-                    />
-                  ) : (
-                    <ArrowDropDownIcon
-                      style={{ fontSize: tablet === true ? 15 : 20 }}
-                    />
-                  )}
-                  #
-                </h4>
-              </TableCell>
+              {phone === true ? (
+                ""
+              ) : (
+                <TableCell align="center">
+                  <h4
+                    onClick={() => setClicked(clicked === 0 ? 1 : 0)}
+                    className={classes.header}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    {clicked === 1 ? (
+                      <ArrowDropUpIcon
+                        style={{ fontSize: tablet === true ? 15 : 20 }}
+                      />
+                    ) : (
+                      <ArrowDropDownIcon
+                        style={{ fontSize: tablet === true ? 15 : 20 }}
+                      />
+                    )}
+                    #
+                  </h4>
+                </TableCell>
+              )}
               <TableCell align="left">
                 <h4 className={classes["header-noclick"]}>Coin</h4>
               </TableCell>

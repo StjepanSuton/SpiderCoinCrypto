@@ -14,6 +14,9 @@
   @include media("<=tablet") {
     font-size: $h4-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h4-phone;
+  }
 }
 .first-box {
   display: flex;
@@ -27,6 +30,9 @@
   margin-right: $padding-value;
   @include media("<=tablet") {
     font-size: $h2-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h2-phone;
   }
 }
 .image {
@@ -46,6 +52,9 @@
   @include media("<=tablet") {
     font-size: $h1-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h1-phone;
+  }
 }
 .percentage-positive {
   font-size: $h4;
@@ -58,6 +67,9 @@
   @include media("<=tablet") {
     font-size: $h4-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h4-phone;
+  }
 }
 .percentage-negative {
   font-size: $h4;
@@ -69,6 +81,9 @@
   margin-right: $padding-value;
   @include media("<=tablet") {
     font-size: $h4-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h4-phone;
   }
 }
 .lowhigh {
@@ -97,6 +112,9 @@
   @include media("<=tablet") {
     font-size: $h4-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h4-phone;
+  }
 }
 .ingrid-value {
   font-family: $primary-font;
@@ -104,5 +122,8 @@
   color: $primary-color;
   @include media("<=tablet") {
     font-size: $h4-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h4-phone;
   }
 }

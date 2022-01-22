@@ -16,6 +16,9 @@
   @include media("<=tablet") {
     font-size: $h2-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h2-phone;
+  }
 }
 .slider {
   width: 100%;

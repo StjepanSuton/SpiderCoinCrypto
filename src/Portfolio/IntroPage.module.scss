@@ -13,6 +13,10 @@
   @include media("<=tablet") {
     height: 50vh;
   }
+  @include media("<=phone") {
+    height: unset;
+    flex-direction: column;
+  }
 }
 .title-container {
   height: 80%;
@@ -28,6 +32,12 @@
   @include media("<=tablet") {
     height: 450px;
   }
+  @include media("<=tablet") {
+    height: 400px;
+    width: 100%;
+    margin-bottom: $padding-value;
+    margin-right: 0;
+  }
 }
 .image {
   margin-bottom: $padding-value;
@@ -40,6 +50,10 @@
   line-height: 42px;
   @include media("<=tablet") {
     font-size: $h2-tablet;
+    line-height: 36px;
+  }
+  @include media("<=phone") {
+    font-size: $h2-phone;
     line-height: 36px;
   }
 }
@@ -86,9 +100,18 @@
     @include media("<=tablet") {
       font-size: $h4-tablet;
     }
+    @include media("<=phone") {
+      font-size: $h4-phone;
+      line-height: unset;
+    }
   }
   @include media("<=tablet") {
     height: 450px;
+  }
+  @include media("<=phone") {
+    height: 400px;
+    width: 100%;
+    margin-bottom: $padding-value;
   }
 }
 .about-title {
@@ -98,6 +121,10 @@
   line-height: 32px;
   @include media("<=tablet") {
     font-size: $h2-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h2-phone;
+    line-height: unset;
   }
 }
 .button {

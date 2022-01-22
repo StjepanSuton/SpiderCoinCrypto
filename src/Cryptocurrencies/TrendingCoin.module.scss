@@ -14,11 +14,19 @@
     height: 100px;
     margin-left: $padding-value;
   }
+  @include media("<=tablet") {
+    width: 130px;
+    height: 100px;
+    margin-left: 0;
+  }
 }
 .image {
   width: 40px;
   @include media("<=tablet") {
     width: 25px;
+  }
+  @include media("<=phone") {
+    width: 20px;
   }
 }
 .info {

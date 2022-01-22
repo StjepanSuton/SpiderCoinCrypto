@@ -14,6 +14,9 @@
   @include media("<=tablet") {
     font-size: $h2-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h2-phone;
+  }
 }
 .subtitle {
   width: 70%;
@@ -32,6 +35,9 @@
   }
   @include media("<=tablet") {
     font-size: $h6-tablet;
+  }
+  @include media("<=phone") {
+    width: 100%;
   }
 }
 .table {

@@ -25,6 +25,9 @@
   @include media("<=tablet") {
     font-size: $h1-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h1-phone;
+  }
 }
 .header {
   display: flex;

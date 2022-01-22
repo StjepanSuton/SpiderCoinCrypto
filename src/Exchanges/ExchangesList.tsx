@@ -84,30 +84,30 @@ function ExchangesList() {
           style={{ position: "absolute", top: "50%", left: "50%" }}
         />
       ) : (
-        <TableContainer style={{ overflow: "visible" }}>
+        <TableContainer style={{ overflow: "visible", overflowX: "scroll" }}>
           <Table
             stickyHeader
             style={{ overflow: "visible", position: "relative", zIndex: 0 }}
           >
             <TableHead>
               <TableRow>
-                <TableCell className={classes.table} align="center">
-                  <h4>#</h4>
+                <TableCell align="center">
+                  <h4 className={classes.table}>#</h4>
                 </TableCell>
-                <TableCell className={classes.table} align="left">
-                  <h4>Name</h4>
+                <TableCell align="left">
+                  <h4 className={classes.table}>Name</h4>
                 </TableCell>
-                <TableCell className={classes.table} align="center">
-                  <h4>Trust Score</h4>
+                <TableCell align="center">
+                  <h4 className={classes.table}>Trust Score</h4>
                 </TableCell>
-                <TableCell className={classes.table} align="right">
-                  <h4>Trade Volume btc</h4>
+                <TableCell align="right">
+                  <h4 className={classes.table}>Trade Volume btc</h4>
                 </TableCell>
-                <TableCell className={classes.table} align="right">
-                  <h4>Trade Volume Normalized</h4>
+                <TableCell align="right">
+                  <h4 className={classes.table}>Trade Volume Normalized</h4>
                 </TableCell>
-                <TableCell className={classes.table} align="right">
-                  <h4>Year Established</h4>
+                <TableCell align="right">
+                  <h4 className={classes.table}>Year Established</h4>
                 </TableCell>
               </TableRow>
             </TableHead>

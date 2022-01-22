@@ -6,7 +6,9 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import SecurityIcon from "@mui/icons-material/Security";
 import Portfolio from "./Portfolio";
 import classes from "./IntroPage.module.scss";
+import useMediaQuery from "@mui/material/useMediaQuery";
 function IntroPage() {
+  const phone = useMediaQuery("(max-width:550px)");
   const [refresh, doRefresh] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
 
@@ -46,22 +48,42 @@ function IntroPage() {
           </div>
           <div className={classes["about-container"]}>
             <div>
-              <TimelineIcon style={{ color: "#132b56", fontSize: 100 }} />
+              <TimelineIcon
+                style={{
+                  color: "#132b56",
+                  fontSize: phone === true ? 60 : 100,
+                }}
+              />
               <h2 className={classes["about-title"]}>Real-time price data</h2>
               <h4>Updating 24/7 using price data from the biggest exchanges</h4>
             </div>
             <div>
-              <MoneyOffIcon style={{ color: "#1a5613", fontSize: 100 }} />
+              <MoneyOffIcon
+                style={{
+                  color: "#1a5613",
+                  fontSize: phone === true ? 60 : 100,
+                }}
+              />
               <h2 className={classes["about-title"]}>Free to use</h2>
               <h4>Top notch crypto portfolio tracking at no cost</h4>
             </div>
             <div>
-              <BarChartIcon style={{ color: "#135651", fontSize: 100 }} />
+              <BarChartIcon
+                style={{
+                  color: "#135651",
+                  fontSize: phone === true ? 60 : 100,
+                }}
+              />
               <h2 className={classes["about-title"]}>Track your portfolio</h2>
               <h4>Thousands of coins and tokens available.</h4>
             </div>
             <div>
-              <SecurityIcon style={{ color: "#561351", fontSize: 100 }} />
+              <SecurityIcon
+                style={{
+                  color: "#561351",
+                  fontSize: phone === true ? 60 : 100,
+                }}
+              />
               <h2 className={classes["about-title"]}>
                 Your data is safe and secure
               </h2>

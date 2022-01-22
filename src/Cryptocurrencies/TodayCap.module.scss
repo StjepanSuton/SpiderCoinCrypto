@@ -18,6 +18,9 @@
   @include media("<=tablet") {
     font-size: $h2-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h2-phone;
+  }
 }
 .subheader {
   font-family: $primary-font;
@@ -26,7 +29,10 @@
   font-weight: 500;
   padding: 0.25rem;
   @include media("<=tablet") {
-    font-size: $h2-tablet;
+    font-size: $h4-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h3-phone;
   }
 }
 .percentage-positive {

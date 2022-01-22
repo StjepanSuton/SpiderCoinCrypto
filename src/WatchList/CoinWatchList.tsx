@@ -30,7 +30,7 @@ interface Coin {
 
 function CoinsWatchlist(props: Coin) {
   const tablet = useMediaQuery("(max-width:1024px)");
-  const phone = useMediaQuery("(max-width:1024px)");
+  const phone = useMediaQuery("(max-width:550px)");
 
   const showBookmark = useSelector((state: RootState) => state.coins);
   const dispatch = useDispatch();
@@ -53,10 +53,14 @@ function CoinsWatchlist(props: Coin) {
           <BookmarkBorderOutlinedIcon onClick={onAddCoin} />
         )}
       </TableCell>
-      <TableCell align="center">
-        {" "}
-        <span className={classes.symbol}>{props.market_cap_rank}</span>
-      </TableCell>
+      {phone === true ? (
+        ""
+      ) : (
+        <TableCell align="center">
+          {" "}
+          <span className={classes.symbol}>{props.market_cap_rank}</span>
+        </TableCell>
+      )}
       <TableCell onClick={getLink} align="left">
         <div className={classes["coin-container"]}>
           <img className={classes.image} src={props.image} alt={props.image} />
@@ -77,7 +81,7 @@ function CoinsWatchlist(props: Coin) {
       )}
       <TableCell align="right">
         <span className={classes.numbers}>
-          {`$ ${props.current_price.toLocaleString("en-IN", {
+          {`$${props.current_price.toLocaleString("en-GB", {
             maximumSignificantDigits: 6,
             maximumFractionDigits: 0,
           })}`}
@@ -104,8 +108,8 @@ function CoinsWatchlist(props: Coin) {
         </span>
       </TableCell>
       <TableCell align="right">
-        <span className={classes.numbers}>{`$ ${props.market_cap.toLocaleString(
-          "en-IN"
+        <span className={classes.numbers}>{`$${props.market_cap.toLocaleString(
+          "en-GB"
         )}`}</span>
       </TableCell>
       {tablet === true ? (

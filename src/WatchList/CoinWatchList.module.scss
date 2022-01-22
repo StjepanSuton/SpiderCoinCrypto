@@ -10,12 +10,18 @@
   @include media("<=tablet") {
     font-size: $h3-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h3-phone;
+  }
 }
 .image {
   width: 25px;
   margin-right: $padding-value;
   @include media("<=tablet") {
     font-size: $h3-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h3-phone;
   }
 }
 .row {
@@ -32,6 +38,9 @@
   @include media("<=tablet") {
     font-size: $h3-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h3-phone;
+  }
 }
 .numbers {
   font-family: $primary-font;
@@ -39,6 +48,9 @@
   font-weight: 600;
   @include media("<=tablet") {
     font-size: $h3-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h3-phone;
   }
 }
 .percentage-positive {
@@ -52,6 +64,9 @@
   @include media("<=tablet") {
     font-size: $h3-tablet;
   }
+  @include media("<=phone") {
+    font-size: $h3-phone;
+  }
 }
 .percentage-negative {
   display: flex;
@@ -63,5 +78,8 @@
   font-weight: 600;
   @include media("<=tablet") {
     font-size: $h3-tablet;
+  }
+  @include media("<=phone") {
+    font-size: $h3-phone;
   }
 }

@@ -10,7 +10,7 @@ import axios from "axios";
 import PortfolioData from "./PortfolioData";
 import HelpIcon from "@mui/icons-material/Help";
 import { Link } from "react-router-dom";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
 interface SearchedCoin {
   id: string;
   symbol: string;
@@ -42,24 +42,28 @@ interface PurchasedCoin {
   image: string;
   purchase_price: number;
 }
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 4,
-};
 
 function Portfolio(props: {
   refresh: number;
   showIntro: boolean;
   introHandler(event: boolean): void;
 }) {
+  //Modal settings
+  const phone = useMediaQuery("(max-width:550px)");
+
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: phone === true ? 300 : 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 4,
+  };
+
   //Popover Settings
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

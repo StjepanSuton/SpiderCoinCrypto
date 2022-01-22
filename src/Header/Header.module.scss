@@ -10,6 +10,7 @@
   margin-bottom: $padding-value;
   @include media("<=tablet") {
     flex-direction: column-reverse;
+    @include container;
   }
 }
 .small-container {
@@ -55,6 +56,9 @@
   @include container;
   @include media("<=tablet") {
     height: 50px;
+  }
+  @include media("<=phone") {
+    height: 75px;
   }
   .smaller-container {
     display: flex;

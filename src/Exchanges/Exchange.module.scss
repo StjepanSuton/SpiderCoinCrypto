@@ -49,6 +49,6 @@
   color: $primary-color;
   font-weight: 600;
   @include media("<=tablet") {
-    font-size: $h4-tablet;
+    font-size: $h3-tablet;
   }
 }
