@@ -63,7 +63,7 @@ function HeaderSearch() {
     setInputValueSearch("");
   };
 
-  const handleUserInput = (e: any) => {
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFocusSearch(true);
     setInputValueSearch(e.target.value);
   };
@@ -86,11 +86,7 @@ function HeaderSearch() {
           type="text"
         ></motion.input>
         <div className={classes.helper}>
-          <button
-            type="button"
-            aria-describedby={id}
-            onMouseEnter={handleClick}
-          >
+          <button type="button" aria-describedby={id} onClick={handleClick}>
             <HelpIcon />
           </button>
           <Popover
@@ -109,7 +105,9 @@ function HeaderSearch() {
               </button>
               Due to the limitations of the API the "Coin id" must be typed in
               correctly. For the list of supported ids visit the link:{" "}
-              <Link to={"/allcoinslist"}>AllCoinsList</Link>
+              <Link target="_blank" to={"/allcoinslist"}>
+                AllCoinsList
+              </Link>
             </p>
           </Popover>
         </div>

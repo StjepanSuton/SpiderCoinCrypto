@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-const initialState: string[] = [];
+const storage = localStorage.getItem("watchList-coinSpider");
+const initialState: string[] = storage === null ? [] : JSON.parse(storage);
 
 export const coinSlice = createSlice({
   name: "coin",
@@ -10,8 +10,16 @@ export const coinSlice = createSlice({
       const id = action.payload;
       const existingItem = state.find((item) => item === id);
       if (existingItem) {
+        localStorage.setItem(
+          "watchList-coinSpider",
+          JSON.stringify(state.filter((item) => item !== id))
+        );
         return state.filter((item) => item !== id);
       } else {
+        localStorage.setItem(
+          "watchList-coinSpider",
+          JSON.stringify([...state, id])
+        );
         return (state = [...state, id]);
       }
     },

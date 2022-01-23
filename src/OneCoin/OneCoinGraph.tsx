@@ -46,7 +46,7 @@ function OneCoinGraph() {
     },
     scales: {
       x: {
-        display: true,
+        display: false,
         grid: {
           display: false,
         },

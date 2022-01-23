@@ -50,7 +50,6 @@ function Portfolio(props: {
 }) {
   //Modal settings
   const phone = useMediaQuery("(max-width:550px)");
-
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -78,12 +77,16 @@ function Portfolio(props: {
   const [inputValue, setInputValue] = useState("");
   const [amountValue, setAmountValue] = useState(1);
   const [dateValue, setDateValue] = useState("");
+  const [formValid, setFormValid] = useState<boolean | null>(null);
   //SearchedCoin Results
   const [searchedCoin, setSetSearchedCoin] = useState<SearchedCoin | null>(
     null
   );
   //Group by Id
-  const [gruopById, setGroupById] = useState<GroupedCoin[]>([]);
+  const storedGroups = localStorage.getItem("group-CoinSpider");
+  const [gruopById, setGroupById] = useState<GroupedCoin[]>(
+    storedGroups === null ? [] : JSON.parse(storedGroups)
+  );
 
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [result, setResult] = useState(false);
@@ -97,7 +100,27 @@ function Portfolio(props: {
   }, [props.refresh]);
 
   //PurchasedCoins
-  const [purchasedCoins, setPurchasedCoins] = useState<PurchasedCoin[]>([]);
+  const storedCoins = localStorage.getItem("coin-CoinSpider");
+  const storedCoinsMutated =
+    storedCoins &&
+    JSON.parse(storedCoins).map((coin: PurchasedCoin, i: number) => {
+      return {
+        id: coin.id,
+        name: coin.name,
+        date_purchased: coin.date_purchased,
+        differenceInDays: Math.floor(
+          (Date.parse(new Date().toString()) / 1000 -
+            coin.date_purchased / 1000) /
+            86400
+        ),
+        amount_purchased: coin.amount_purchased,
+        image: coin.image,
+        purchase_price: coin.purchase_price,
+      };
+    });
+  const [purchasedCoins, setPurchasedCoins] = useState<PurchasedCoin[]>(
+    storedCoinsMutated === null ? [] : storedCoinsMutated
+  );
   useEffect(() => {
     if (purchasedCoins.length > 0) props.introHandler(false);
   }, [purchasedCoins, props.introHandler]);
@@ -164,6 +187,9 @@ function Portfolio(props: {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
+    setTimeout(() => {
+      setFormValid(true);
+    }, 4000);
     const amount = amountValue;
     const date = dateValue;
     if (result === true && amount > 0 && Date.parse(date) <= Date.now()) {
@@ -187,7 +213,12 @@ function Portfolio(props: {
           image: searchedCoin.image.small,
           purchase_price: purchasePrice,
         };
+
         setPurchasedCoins((prevState) => {
+          localStorage.setItem(
+            "coin-CoinSpider",
+            JSON.stringify([coin, ...prevState])
+          );
           return [coin, ...prevState];
         });
         if (gruopById.length > 0) {
@@ -205,8 +236,21 @@ function Portfolio(props: {
               }
             });
             setGroupById(grouped);
+            localStorage.setItem("group-CoinSpider", JSON.stringify(grouped));
           } else {
             setGroupById((prevState) => {
+              localStorage.setItem(
+                "group-CoinSpider",
+                JSON.stringify([
+                  {
+                    id: coin.id,
+                    name: coin.name,
+                    image: searchedCoin.image.small,
+                    amount_purchased: coin.amount_purchased,
+                  },
+                  ...prevState,
+                ])
+              );
               return [
                 {
                   id: coin.id,
@@ -219,6 +263,17 @@ function Portfolio(props: {
             });
           }
         } else {
+          localStorage.setItem(
+            "group-CoinSpider",
+            JSON.stringify([
+              {
+                id: coin.id,
+                name: coin.name,
+                image: searchedCoin.image.small,
+                amount_purchased: coin.amount_purchased,
+              },
+            ])
+          );
           setGroupById([
             {
               id: coin.id,
@@ -231,6 +286,7 @@ function Portfolio(props: {
       }
     } else {
       console.log("Bad");
+      setFormValid(false);
     }
   };
 
@@ -238,6 +294,7 @@ function Portfolio(props: {
     setGroupById([]);
     setPurchasedCoins([]);
     props.introHandler(true);
+    localStorage.clear();
   };
 
   return (
@@ -258,7 +315,7 @@ function Portfolio(props: {
                 <button
                   type="button"
                   aria-describedby={id}
-                  onMouseEnter={handleClick}
+                  onClick={handleClick}
                 >
                   <HelpIcon />
                 </button>
@@ -279,7 +336,9 @@ function Portfolio(props: {
                     Due to the limitations of the API the "Coin id" must be
                     typed in correctly. For the list of supported ids visit the
                     link:
-                    <Link to={"/allcoinslist"}>AllCoinsList</Link>
+                    <Link target="_blank" to={"/allcoinslist"}>
+                      AllCoinsList
+                    </Link>
                   </p>
                 </Popover>
               </div>
@@ -332,6 +391,13 @@ function Portfolio(props: {
                 ""
               )}
               <button className={classes.button}>Submit </button>
+              {formValid === false ? (
+                <h6 className={classes.error}>
+                  {`Oops look like some of the information isn't valid,please rewiev and try again`}
+                </h6>
+              ) : (
+                ""
+              )}
             </form>
           </Box>
         </Fade>

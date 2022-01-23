@@ -86,7 +86,6 @@ function PortfolioDataGraphLine(props: { allFunds: number[][] | null }) {
     props.allFunds.slice(
       props.allFunds.length - days >= 0 ? props.allFunds.length - days : 0
     );
-  console.log(funds);
   const data = {
     labels: funds?.map((date, i) => {
       return new Date(date[0])

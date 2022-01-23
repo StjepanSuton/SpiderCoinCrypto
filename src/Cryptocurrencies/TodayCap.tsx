@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./TodayCap.module.scss";
 import axios from "axios";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 interface Payload {
   data: {

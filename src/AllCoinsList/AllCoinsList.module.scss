@@ -1,6 +1,6 @@
 @import "../variables";
 @import "../components";
-
+@import "../brakepoints";
 .container {
   @include container;
   input {
@@ -41,6 +41,10 @@
   grid-template-columns: 2fr 2fr;
   grid-auto-rows: 100px;
   grid-gap: $padding-value;
+  @include media("<=tablet") {
+    grid-template-columns: 2fr 2fr;
+    grid-auto-rows: 120px;
+  }
 }
 .coin-container {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
@@ -54,10 +58,17 @@
     font-size: $h6;
     margin-top: calc($padding-value/2);
     margin-bottom: calc($padding-value/2);
+    @include media("<=tablet") {
+      width: 50px;
+      font-size: $h6-tablet;
+    }
   }
   .subtitle {
     font-family: $primary-font;
     font-size: $h6;
     color: $secondary-color;
+    @include media("<=tablet") {
+      font-size: $h6-tablet;
+    }
   }
 }

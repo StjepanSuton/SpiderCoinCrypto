@@ -126,7 +126,7 @@ function Header() {
                 ""
               ) : (
                 <Link
-                  onClick={() => setShowMenu(!showMenu)}
+                  onClick={() => tablet && setShowMenu(!showMenu)}
                   className={classes.link}
                   to="/cryptocurrencies"
                 >
@@ -134,28 +134,28 @@ function Header() {
                 </Link>
               )}
               <Link
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={() => tablet && setShowMenu(!showMenu)}
                 className={classes.link}
                 to="/cryptocurrencies"
               >
                 <h3>Cryptocurrencies</h3>
               </Link>
               <Link
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={() => tablet && setShowMenu(!showMenu)}
                 className={classes.link}
                 to="/exchanges"
               >
                 <h3>Exchanges</h3>
               </Link>
               <Link
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={() => tablet && setShowMenu(!showMenu)}
                 className={classes.link}
                 to="/portfolio"
               >
                 <h3>Portfolio</h3>
               </Link>
               <Link
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={() => tablet && setShowMenu(!showMenu)}
                 className={classes.link}
                 to="/watchlist"
               >

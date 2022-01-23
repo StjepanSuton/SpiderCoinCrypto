@@ -43,11 +43,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  borderRadius: 4,
 };
 
 function PortfolioData(props: {
@@ -69,14 +70,11 @@ function PortfolioData(props: {
     props.clearAllfunds();
   };
 
-  ///Coins state
-  const [sortedCoins, setSortedCoins] = useState<Coin[]>();
+  const [sortedCoins, setSortedCoins] = useState<Coin[]>([]);
   const [coinsPrices, setCoinsPrices] = useState<CoinPrices[] | null>(null);
   const [sortedCoinsPrices, setSortedCoinsPrices] = useState<
     CoinPrices[] | null
   >(null);
-  //coins gruoped by id with total funds
-  const [grouped, setGrouped] = useState();
   //All invested money
   const [allFunds, setAllFunds] = useState<number[][] | null>(null);
   //Sort recived Coin Data
