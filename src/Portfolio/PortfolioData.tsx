@@ -96,7 +96,7 @@ function PortfolioData(props: {
             `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=usd&days=${coin.differenceInDays}&interval=daily`,
             {
               cancelToken: source.token,
-              timeout: 5000,
+              timeout: 9000,
             }
           )
           .then((response) => {
@@ -305,17 +305,17 @@ function PortfolioData(props: {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell align="left">
-                          <h4>Name</h4>
+                        <TableCell  align="left">
+                          <h4 className={classes.table}>Name</h4>
                         </TableCell>
                         <TableCell align="right">
-                          <h4>Amount Purchased</h4>
+                          <h4 className={classes.table}>Amount Purchased</h4>
                         </TableCell>
                         <TableCell align="right">
-                          <h4>Date Purchased</h4>
+                          <h4 className={classes.table}>Date Purchased</h4>
                         </TableCell>
                         <TableCell align="right">
-                          <h4>Purchase Price</h4>
+                          <h4 className={classes.table}>Purchase Price</h4>
                         </TableCell>
                       </TableRow>
                     </TableHead>

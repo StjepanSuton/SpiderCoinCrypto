@@ -18,7 +18,7 @@ function TodayCap() {
     axios
       .get("https://api.coingecko.com/api/v3/global", {
         cancelToken: source.token,
-        timeout: 5000,
+        timeout: 9000,
       })
       .then((response) => setCap(response.data))
       .catch((error) => console.log(error));

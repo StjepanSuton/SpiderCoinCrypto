@@ -32,7 +32,7 @@ function ExchangesList() {
     axios
       .get("https://api.coingecko.com/api/v3/exchanges?per_page=100", {
         cancelToken: source.token,
-        timeout: 5000,
+        timeout: 9000,
       })
       .then((response) => {
         setExchangeData(response.data);

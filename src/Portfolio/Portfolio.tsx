@@ -139,7 +139,7 @@ function Portfolio(props: {
           `https://api.coingecko.com/api/v3/coins/${inputValue}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`,
           {
             cancelToken: source.token,
-            timeout: 5000,
+            timeout: 9000,
           }
         )
         .then((response) => {
@@ -171,7 +171,7 @@ function Portfolio(props: {
           `https://api.coingecko.com/api/v3/coins/${inputValue}/history?date=${rightDateFormat}&localization=false`,
           {
             cancelToken: source.token,
-            timeout: 5000,
+            timeout: 9000,
           }
         )
         .then((response) => {

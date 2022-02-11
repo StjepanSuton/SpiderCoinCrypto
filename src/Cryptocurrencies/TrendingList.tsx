@@ -31,7 +31,7 @@ function TrendingList() {
     axios
       .get("https://api.coingecko.com/api/v3/search/trending", {
         cancelToken: source.token,
-        timeout: 5000,
+        timeout: 9000,
       })
       .then((response) => {
         setTrending(response.data);
@@ -53,7 +53,7 @@ function TrendingList() {
         `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
         {
           cancelToken: source.token,
-          timeout: 5000,
+          timeout: 9000,
         }
       )
       .then((response) => setBtcPrice(response.data.bitcoin.usd))

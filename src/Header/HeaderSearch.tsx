@@ -43,7 +43,7 @@ function HeaderSearch() {
           `https://api.coingecko.com/api/v3/coins/${inputValueSearch}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`,
           {
             cancelToken: source.token,
-            timeout: 5000,
+            timeout: 9000,
           }
         )
         .then((response) => {

@@ -47,7 +47,7 @@ function Top100() {
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h%2C7d",
         {
           cancelToken: source.token,
-          timeout: 5000,
+          timeout: 9000,
         }
       )
       .then((response) => {

@@ -64,6 +64,8 @@
   @include media("<=phone") {
     font-size: $h4-phone;
     padding: calc($padding-value/2);
+    margin-left: 0;
+    margin-right: calc($padding-value/2);
   }
 }
 .button-clear {
@@ -88,6 +90,8 @@
     padding: calc($padding-value/2);
     margin-top: calc($padding-value/2);
     align-self: flex-end;
+    margin-left: 0;
+    margin-right: calc($padding-value/2);
   }
 }
 .graph-container {
@@ -196,6 +200,9 @@
     @include media("<=tablet") {
       font-size: $h4-tablet;
     }
+    @include media("<=phone") {
+      font-size: $h4-phone;
+    }
   }
   h6 {
     font-family: $primary-font;
@@ -213,5 +220,6 @@
   .name-image {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 }

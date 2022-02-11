@@ -47,7 +47,7 @@ function Header() {
     axios
       .get("https://api.coingecko.com/api/v3/global", {
         cancelToken: source.token,
-        timeout: 5000,
+        timeout: 9000,
       })
       .then((response) => setMarketData(response.data))
       .catch((error) => console.log(error));
@@ -62,7 +62,7 @@ function Header() {
     axios
       .get("https://api.coingecko.com/api/v3/exchanges/list", {
         cancelToken: source.token,
-        timeout: 5000,
+        timeout: 9000,
       })
       .then((response) => setExchanges(response.data.length))
       .catch((error) => console.log(error));

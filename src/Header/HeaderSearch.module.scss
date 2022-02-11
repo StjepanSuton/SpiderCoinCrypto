@@ -23,6 +23,9 @@
   &:focus {
     border: 0.5px solid rgba(0, 0, 0, 0.461);
   }
+  @include media("<=phone") {
+    width: 165px;
+  }
 }
 .small-container2 {
   cursor: pointer;

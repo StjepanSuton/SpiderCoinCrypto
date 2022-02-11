@@ -87,7 +87,7 @@ function OneCoin() {
           `https://api.coingecko.com/api/v3/coins/${id}?localization=false`,
           {
             cancelToken: source.token,
-            timeout: 5000,
+            timeout: 9000,
           }
         )
         .then((response) => setCoinData(response.data))

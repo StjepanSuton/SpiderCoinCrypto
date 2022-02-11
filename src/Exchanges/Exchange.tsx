@@ -51,7 +51,7 @@ function Exchange(props: Exchanges) {
   `,
         {
           cancelToken: source.token,
-          timeout: 5000,
+          timeout: 9000,
         }
       )
       .then((response) =>
